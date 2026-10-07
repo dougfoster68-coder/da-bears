@@ -216,6 +216,7 @@ input[type=range] { accent-color: var(--orange); }
 /* ---------- GRATE LOOP ---------- */
 .grate { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 32px; align-items: center; margin-top: 28px; }
 .vframe { position: relative; aspect-ratio: 16 / 9; max-width: 100%; background: #000; border: 4px solid var(--bone); box-shadow: 12px 12px 0 var(--orange); }
+.benvid { margin-top: 40px; max-width: 860px; }
 .vframe .vfallback { position: absolute; inset: 0; display: grid; place-items: center; padding: 24px; text-align: center; font: 700 18px var(--f-cond); text-transform: uppercase; letter-spacing: .06em; color: var(--bone); background: var(--navy-2); text-decoration: none; }
 .vframe iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
 .vframe .live { position: absolute; top: -14px; left: 14px; background: var(--orange); color: var(--navy); font: 800 13px var(--f-cond); text-transform: uppercase; letter-spacing: .12em; padding: 4px 10px; z-index: 1; }
@@ -305,9 +306,7 @@ footer p { max-width: 75ch; }
       <figure class="quote-card" style="margin:0">
         <blockquote>"F*** the <em>Packers!</em> F*** 'em!"</blockquote>
         <figcaption>— Ben Johnson, Soldier Field locker room, January 2026. He was asked to apologize. He did not.</figcaption>
-        <a class="play" href="https://www.youtube.com/results?search_query=ben+johnson+f+the+packers+locker+room+speech" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4v16l13-8z"/></svg>Watch the speech (YouTube)
-        </a>
+
       </figure>
       <ul class="facts">
         <li><b>0</b><div>Apologies issued<small>"I don't like that team." Chairman George McCaskey reportedly agreed.</small></div></li>
@@ -315,6 +314,11 @@ footer p { max-width: 75ch; }
         <li><b>31</b><div>Points dropped on Green Bay in the playoffs<small>Also the number of times Minnow has said "we'll get 'em next year."</small></div></li>
         <li><b>∞</b><div>Packers players who called him a "troll"<small>Close. Trolls live under bridges. Packers fans live under .500 vibes.</small></div></li>
       </ul>
+    </div>
+    <div class="vframe benvid">
+      <span class="live">The speech · Turn the sound up</span>
+      <div id="benVid"></div>
+      <a class="vfallback" id="benFallback" hidden href="https://www.youtube.com/watch?v=Sw0uqT9qWWc" target="_blank" rel="noopener">Tap to watch Ben Johnson's locker-room speech</a>
     </div>
   </div>
 </section>
@@ -558,7 +562,7 @@ footer p { max-width: 75ch; }
 
   // ---------- Videos (link out; artifacts can't embed YouTube) ----------
   function yt(q) { return "https://www.youtube.com/results?search_query=" + encodeURIComponent(q); }
-  var BEN = { t: "Ben Johnson: \"F*** the Packers\"", s: "The locker room speech. Required daily viewing.", u: yt("Ben Johnson f the Packers locker room") };
+  var BEN = { t: "Ben Johnson: \"F*** the Packers\"", s: "The locker room speech. Required daily viewing.", u: "https://www.youtube.com/watch?v=Sw0uqT9qWWc" };
   var VIDS = [
     { t: "Bears 31, Packers 27: Wild Card highlights", s: "The comeback. Watch it with the sound up near Minnow's desk.", u: yt("Bears Packers wild card 31-27 highlights") },
     { t: "Ben Johnson: \"I don't like that team\"", s: "The non-apology press conference. Poetry.", u: yt("Ben Johnson not sorry Packers press conference") },
@@ -701,29 +705,38 @@ footer p { max-width: 75ch; }
 
 <script>
 (function () {
-  // Try each cheese-grating clip; skip any whose owner blocks embedding (errors 101/150).
-  var CLIPS = ["Gkmj-8vICQI", "_-HLMiKG9Is", "ZaMd3mEG424", "ixapZx-uZbE"], idx = 0, player;
-  function fail() {
-    idx++;
-    if (idx < CLIPS.length) { player.loadVideoById(CLIPS[idx]); return; }
-    document.getElementById("grateVid").hidden = true;
-    document.getElementById("grateFallback").hidden = false;
+  // Each slot tries its clips in order and skips any whose owner blocks embedding (errors 101/150).
+  var SLOTS = [
+    { el: "benVid", fallback: "benFallback", clips: ["Sw0uqT9qWWc", "h_YpQTrzmng"], loop: false,
+      vars: { autoplay: 0, controls: 1, rel: 0, playsinline: 1, modestbranding: 1 } },
+    { el: "grateVid", fallback: "grateFallback", clips: ["Gkmj-8vICQI", "_-HLMiKG9Is", "ZaMd3mEG424", "ixapZx-uZbE"], loop: true,
+      vars: { autoplay: 1, mute: 1, controls: 0, rel: 0, playsinline: 1, modestbranding: 1 } }
+  ];
+  function giveUp(slot) {
+    var el = document.getElementById(slot.el); if (el) el.hidden = true;
+    document.getElementById(slot.fallback).hidden = false;
   }
-  window.onYouTubeIframeAPIReady = function () {
-    player = new YT.Player("grateVid", {
+  function build(slot) {
+    var i = 0;
+    var player = new YT.Player(slot.el, {
       host: "https://www.youtube-nocookie.com",
-      videoId: CLIPS[0],
-      playerVars: { autoplay: 1, mute: 1, controls: 0, rel: 0, playsinline: 1, modestbranding: 1 },
+      videoId: slot.clips[0],
+      playerVars: slot.vars,
       events: {
-        onReady: function (e) { e.target.mute(); e.target.playVideo(); },
-        onStateChange: function (e) { if (e.data === YT.PlayerState.ENDED) { e.target.seekTo(0); e.target.playVideo(); } },
-        onError: fail
+        onReady: function (e) { if (slot.loop) { e.target.mute(); e.target.playVideo(); } },
+        onStateChange: function (e) { if (slot.loop && e.data === YT.PlayerState.ENDED) { e.target.seekTo(0); e.target.playVideo(); } },
+        onError: function () {
+          i++;
+          if (i < slot.clips.length) { slot.loop ? player.loadVideoById(slot.clips[i]) : player.cueVideoById(slot.clips[i]); }
+          else giveUp(slot);
+        }
       }
     });
-  };
+  }
+  window.onYouTubeIframeAPIReady = function () { SLOTS.forEach(build); };
   var tag = document.createElement("script");
   tag.src = "https://www.youtube.com/iframe_api";
-  tag.onerror = function () { idx = CLIPS.length; fail(); };
+  tag.onerror = function () { SLOTS.forEach(giveUp); };
   document.head.appendChild(tag);
 })();
 </script>
