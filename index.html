@@ -211,6 +211,9 @@ input[type=range] { accent-color: var(--orange); }
 @media (max-width: 520px) { .brigade { grid-template-columns: minmax(0,1fr); } .brigade svg { max-width: 110px; } .hero-grater { opacity: .35; } }
 @media (prefers-reduced-motion: reduce) { .hero-grater .shreds { animation: none; } }
 
+.gbb { display: grid; gap: 12px; margin-block: 28px 8px; }
+.gbb h3 { font-size: clamp(30px, 4.5vw, 46px); text-transform: uppercase; color: var(--bone); }
+.vframe.gbbvid { width: min(640px, 100%); margin-top: 8px; }
 .sox { margin-top: 18px; font-family: var(--f-cond); font-weight: 700; text-transform: uppercase; letter-spacing: .16em; font-size: 16px; color: #C4CED4; opacity: .9; }
 .sox span { color: #fff; }
 /* ---------- GRATE LOOP ---------- */
@@ -495,6 +498,14 @@ footer p { max-width: 75ch; }
   <div class="wrap">
     <p><strong>Satire.</strong> Scores are fictional, predictions are rigged, and the algorithm is just a Bears fan yelling. Real facts: the Bears beat Green Bay 31–27 in the January 2026 Wild Card round, Ben Johnson's locker-room speech went viral and he declined to apologize, and this week's game kicks off Sunday, October 11 at noon CT at Lambeau on FOX.</p>
     <p>Sources: <a href="https://www.si.com/nfl/bears/onsi/no-backtracking-by-ben-johnson-on-postgame-rant-about-packers" target="_blank" rel="noopener">SI</a> · <a href="https://africa.espn.com/nfl/story/_/id/47591743/ben-johnson-not-sorry-packers-rant-team" target="_blank" rel="noopener">ESPN</a> · <a href="https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/bears-packers-game-in-week-5-moved-to-1-p-m-et-kickoff" target="_blank" rel="noopener">PFT on the kickoff change</a></p>
+    <div class="gbb">
+      <div class="eyebrow">Wild Card locker room · The closer</div>
+      <h3>Good. Better. Best.</h3>
+      <div class="vframe gbbvid">
+        <div id="gbbVid"></div>
+        <a class="vfallback" id="gbbFallback" hidden href="https://www.youtube.com/watch?v=Sw0uqT9qWWc&amp;t=276s" target="_blank" rel="noopener">Tap to watch "Good, Better, Best"</a>
+      </div>
+    </div>
     <p class="sox">P.S. Tip of the cap to the South Side. <span>Go Sox.</span></p>
   </div>
 </footer>
@@ -723,7 +734,9 @@ footer p { max-width: 75ch; }
     { el: "benVid", fallback: "benFallback", clips: ["Sw0uqT9qWWc", "bZ6pKfyhyAE"], loop: true, start: 1, end: 20,
       vars: { autoplay: 1, mute: 1, controls: 0, rel: 0, playsinline: 1, modestbranding: 1, start: 1, end: 20 } },
     { el: "grateVid", fallback: "grateFallback", clips: ["Gkmj-8vICQI", "_-HLMiKG9Is", "ZaMd3mEG424", "ixapZx-uZbE"], loop: true,
-      vars: { autoplay: 1, mute: 1, controls: 0, rel: 0, playsinline: 1, modestbranding: 1 } }
+      vars: { autoplay: 1, mute: 1, controls: 0, rel: 0, playsinline: 1, modestbranding: 1 } },
+    { el: "gbbVid", fallback: "gbbFallback", clips: ["Sw0uqT9qWWc"], loop: false,
+      vars: { autoplay: 0, controls: 1, rel: 0, playsinline: 1, modestbranding: 1, start: 276, end: 293 } }
   ];
   function giveUp(slot) {
     var el = document.getElementById(slot.el); if (el) el.hidden = true;
