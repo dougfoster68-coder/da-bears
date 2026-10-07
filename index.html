@@ -55,6 +55,11 @@ section { padding-block: 56px; border-top: 1px solid var(--line); }
 .ticker { background: var(--orange); color: var(--navy); font-family: var(--f-cond); font-weight: 800; text-transform: uppercase; letter-spacing: .06em; font-size: 17px; overflow: hidden; white-space: nowrap; border-block: 3px solid var(--navy); }
 .ticker-track { display: inline-block; padding-block: 8px; animation: tick 60s linear infinite; }
 .ticker-track span { padding-inline: 28px; }
+.ticker.gbs { background: var(--gb-green); color: var(--cheese); border-block: 3px solid var(--cheese); font-family: var(--f-display); font-weight: 400; font-size: 26px; letter-spacing: .04em; }
+.ticker.gbs .ticker-track { padding-block: 6px; animation-duration: 30s; animation-direction: reverse; }
+.ticker.gbs span { padding-inline: 18px; }
+.ticker.gbs span:nth-child(even) { color: var(--bone); }
+@media (prefers-reduced-motion: reduce) { .ticker.gbs .ticker-track { animation: none; } }
 @keyframes tick { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
 /* ---------- SHRINE ---------- */
@@ -233,6 +238,7 @@ footer p { max-width: 75ch; }
 </head>
 <body>
 
+<div class="ticker gbs" aria-label="Green Bay sucks"><div class="ticker-track" aria-hidden="true"><span>GREEN BAY SUCKS ★</span><span>GREEN BAY SUCKS ★</span><span>GREEN BAY SUCKS ★</span><span>GREEN BAY SUCKS ★</span><span>GREEN BAY SUCKS ★</span><span>GREEN BAY SUCKS ★</span><span>GREEN BAY SUCKS ★</span><span>GREEN BAY SUCKS ★</span><span>GREEN BAY SUCKS ★</span><span>GREEN BAY SUCKS ★</span><span>GREEN BAY SUCKS ★</span><span>GREEN BAY SUCKS ★</span><span>GREEN BAY SUCKS ★</span><span>GREEN BAY SUCKS ★</span><span>GREEN BAY SUCKS ★</span><span>GREEN BAY SUCKS ★</span></div></div>
 <svg class="grater-defs" aria-hidden="true" focusable="false">
   <defs>
     <pattern id="holes" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M2 6 q3 -5 6 0 z" fill="#0B162A"/></pattern>
@@ -483,6 +489,7 @@ footer p { max-width: 75ch; }
   </div>
 </section>
 </main>
+<div class="ticker gbs" aria-label="Green Bay sucks"><div class="ticker-track" aria-hidden="true"><span>GREEN BAY SUCKS ★</span><span>GREEN BAY SUCKS ★</span><span>GREEN BAY SUCKS ★</span><span>GREEN BAY SUCKS ★</span><span>GREEN BAY SUCKS ★</span><span>GREEN BAY SUCKS ★</span><span>GREEN BAY SUCKS ★</span><span>GREEN BAY SUCKS ★</span><span>GREEN BAY SUCKS ★</span><span>GREEN BAY SUCKS ★</span><span>GREEN BAY SUCKS ★</span><span>GREEN BAY SUCKS ★</span><span>GREEN BAY SUCKS ★</span><span>GREEN BAY SUCKS ★</span><span>GREEN BAY SUCKS ★</span><span>GREEN BAY SUCKS ★</span></div></div>
 
 <footer>
   <div class="wrap">
