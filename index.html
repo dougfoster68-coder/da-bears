@@ -47,6 +47,13 @@ section { padding-block: 56px; border-top: 1px solid var(--line); }
 .hero h1 { font-size: clamp(56px, 12vw, 148px); text-transform: uppercase; line-height: .88; }
 .hero h1 .o { color: var(--orange); }
 .hero h1 .strike { color: var(--muted); text-decoration: line-through; text-decoration-color: var(--orange); text-decoration-thickness: .08em; font-size: .42em; display: block; margin-top: .25em; }
+.hero-logo { position: absolute; right: 4%; top: 44%; width: clamp(160px, 24vw, 300px); height: auto; filter: drop-shadow(0 10px 30px rgba(226,85,15,.35)); pointer-events: none; }
+.tm { display: inline-flex; align-items: center; gap: 10px; }
+.tm img { width: 34px; height: 34px; }
+.tm.gb img { transform: rotate(180deg); filter: grayscale(1) opacity(.7); }
+.sb-logo { width: 34px; height: 34px; vertical-align: middle; margin-right: 10px; float: left; }
+.sb-logo.gb { transform: rotate(180deg); filter: grayscale(1) opacity(.6); }
+@media (max-width: 760px) { .hero-logo { display: none; } }
 .matchup { display: flex; flex-wrap: wrap; gap: 12px 28px; align-items: center; font-family: var(--f-cond); font-weight: 700; text-transform: uppercase; letter-spacing: .06em; font-size: 18px; }
 .matchup .vs { background: var(--orange); color: var(--navy); padding: 4px 12px; font-family: var(--f-display); font-weight: 400; font-size: 22px; letter-spacing: .04em; }
 .countdown { display: flex; gap: 10px; flex-wrap: wrap; }
@@ -271,9 +278,8 @@ footer p { max-width: 75ch; }
 <header class="hero">
     <svg class="hero-grater" viewBox="0 0 140 170" aria-hidden="true">
       <use href="#grater" x="10" y="0" width="90" height="120"/>
-      <path d="M92 70 l40 -22 l6 34 z" fill="#F2C230" stroke="#0B162A" stroke-width="2"/>
-      <circle cx="118" cy="66" r="3" fill="#D9A61A"/><circle cx="128" cy="74" r="2.5" fill="#D9A61A"/>
-      <g class="shreds" fill="#F2C230">
+      <image href="img/gb.png" x="86" y="34" width="54" height="54" transform="rotate(-24 113 61)"/>
+      <g class="shreds" fill="#FFB612">
         <rect x="40" y="128" width="3" height="12" rx="1.5" transform="rotate(20 40 128)"/>
         <rect x="56" y="132" width="3" height="10" rx="1.5" transform="rotate(-15 56 132)"/>
         <rect x="70" y="126" width="3" height="13" rx="1.5" transform="rotate(35 70 126)"/>
@@ -284,8 +290,9 @@ footer p { max-width: 75ch; }
   <div class="wrap">
     <div class="eyebrow">Week 5 · Sunday, Oct 11, 2026 · Lambeau Field · Noon CT on FOX</div>
     <h1>Da <span class="o">Bears</span>.<br>Da <span class="o">Coach</span>.<span class="strike">Da Packers (lol)</span></h1>
+    <img class="hero-logo" src="img/chi.png" alt="Chicago Bears logo" width="300" height="300">
     <div class="matchup">
-      <span>Chicago Bears</span><span class="vs">AT</span><span>Green Bay Cheese Co-op</span>
+      <span class="tm"><img src="img/chi.png" alt="" width="34" height="34">Chicago Bears</span><span class="vs">AT</span><span class="tm gb"><img src="img/gb.png" alt="" width="34" height="34">Green Bay Cheese Co-op</span>
     </div>
     <div>
       <div class="countdown" id="countdown" aria-live="polite">
@@ -398,8 +405,8 @@ footer p { max-width: 75ch; }
       <div class="result" id="result" aria-live="polite">
         <div class="scoreboard">
           <div class="eyebrow" id="simLabel">Simulation #1 of 1 (we only needed one)</div>
-          <div class="sb-row"><div class="sb-team">Chicago Bears<small id="bearsNote">Monsters of the Midway</small></div><div class="sb-score" id="bScore">38</div></div>
-          <div class="sb-row gb"><div class="sb-team">Green Bay Packers<small id="gbNote">Monsters of the Mid-Tier</small></div><div class="sb-score" id="pScore">10</div></div>
+          <div class="sb-row"><div class="sb-team"><img class="sb-logo" src="img/chi.png" alt="">Chicago Bears<small id="bearsNote">Monsters of the Midway</small></div><div class="sb-score" id="bScore">38</div></div>
+          <div class="sb-row gb"><div class="sb-team"><img class="sb-logo gb" src="img/gb.png" alt="">Green Bay Packers<small id="gbNote">Monsters of the Mid-Tier</small></div><div class="sb-score" id="pScore">10</div></div>
           <div>
             <div class="prob"><i id="probBar"></i></div>
             <div class="prob-lbl"><span id="probB">CHI 100.0%</span><span id="probP">GB 0.0%</span></div>
