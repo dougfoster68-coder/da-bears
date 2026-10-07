@@ -1034,18 +1034,18 @@ section h2::after { content: ""; position: absolute; left: 0; bottom: 0; width: 
   function burst() {
     if (reduce) return;
     var cols = ["#E2550F", "#FF8A4C", "#F4EFE6", "#1C2F52", "#0B162A"];
-    for (var i = 0; i < 160; i++) parts.push({
-      x: innerWidth * (.2 + Math.random() * .6), y: innerHeight * .35, vx: (Math.random() - .5) * 14, vy: -6 - Math.random() * 10,
-      r: 4 + Math.random() * 6, a: Math.random() * 6, va: (Math.random() - .5) * .4, c: cols[i % cols.length], life: 0 });
+    for (var i = 0; i < 220; i++) parts.push({
+      x: innerWidth * (.15 + Math.random() * .7), y: innerHeight * .4, vx: (Math.random() - .5) * 18, vy: -8 - Math.random() * 12,
+      r: 12 + Math.random() * 14, a: Math.random() * 6, va: (Math.random() - .5) * .4, c: cols[i % cols.length], life: 0 });
     if (!raf) raf = requestAnimationFrame(draw);
   }
   function draw() {
     ctx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
     ctx.clearRect(0, 0, innerWidth, innerHeight);
-    parts = parts.filter(function (p) { return p.life < 160 && p.y < innerHeight + 20; });
+    parts = parts.filter(function (p) { return p.life < 220 && p.y < innerHeight + 20; });
     parts.forEach(function (p) {
-      p.life++; p.vy += .32; p.vx *= .985; p.x += p.vx; p.y += p.vy; p.a += p.va;
-      ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.a); ctx.fillStyle = p.c; ctx.fillRect(-p.r / 2, -p.r / 4, p.r, p.r / 2); ctx.restore();
+      p.life++; p.vy += .28; p.vx *= .98; p.x += p.vx; p.y += p.vy; p.a += p.va;
+      ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.a); ctx.fillStyle = p.c; ctx.fillRect(-p.r / 2, -p.r / 3, p.r, p.r * .66); ctx.restore();
     });
     raf = parts.length ? requestAnimationFrame(draw) : 0;
     if (!raf) ctx.clearRect(0, 0, innerWidth, innerHeight);
