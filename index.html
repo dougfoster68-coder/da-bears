@@ -284,6 +284,14 @@ footer p { max-width: 75ch; }
 }
 @media (prefers-reduced-motion: reduce) { .ticker-track { animation: none; } }
 
+.btfd { border-top: 0; padding-block: 64px; overflow: hidden; background:
+  repeating-linear-gradient(-45deg, rgba(226,85,15,.07) 0 22px, transparent 22px 44px), var(--navy); }
+.btfd-inner { display: grid; justify-items: center; text-align: center; line-height: .82; font-family: var(--f-display); text-transform: uppercase; }
+.btfd .l1, .btfd .l3 { font-size: clamp(80px, 19vw, 260px); color: var(--bone); }
+.btfd .l2 { font-size: clamp(54px, 13vw, 180px); color: transparent; -webkit-text-stroke: 2px var(--orange); letter-spacing: .02em; }
+.btfd .l3 { color: var(--orange); text-shadow: 0 0 40px rgba(226,85,15,.45); }
+.btfd .l1, .btfd .l2, .btfd .l3 { transition: transform .4s ease; }
+.btfd:hover .l2 { color: var(--orange); }
 /* ================= POLISH LAYER ================= */
 body { background:
   radial-gradient(1200px 600px at 85% -10%, rgba(226,85,15,.16), transparent 60%),
@@ -634,6 +642,13 @@ section h2::after { content: ""; position: absolute; left: 0; bottom: 0; width: 
     <h2>Green Bay Suck Index™</h2>
     <p class="lede">Measured on a scale of 0 to "Minnow's fantasy team."</p>
     <div class="index" id="index"></div>
+  </div>
+</section>
+<section class="btfd" aria-label="Bear the fuck down">
+  <div class="btfd-inner">
+    <span class="l1">Bear</span>
+    <span class="l2">the fuck</span>
+    <span class="l3">down.</span>
   </div>
 </section>
 </main>
