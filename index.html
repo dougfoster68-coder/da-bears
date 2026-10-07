@@ -1,0 +1,622 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Da Bears Bulletin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@400;500;700&family=Barlow+Condensed:wght@500;700;800&display=swap">
+<style>
+/* Layout: one committed night-game look. Navy field, orange hits, meme cards set in Impact-style Anton. Single theme by choice. */
+:root {
+  --navy: #0B162A;
+  --navy-2: #13223D;
+  --navy-3: #1C2F52;
+  --orange: #E2550F;
+  --orange-soft: #FF8A4C;
+  --bone: #F4EFE6;
+  --muted: #9FB0CC;
+  --cheese: #F2C230;
+  --gb-green: #2E5E40;
+  --line: rgba(244,239,230,.14);
+  --f-display: "Anton", Impact, "Arial Narrow Bold", sans-serif;
+  --f-cond: "Barlow Condensed", "Arial Narrow", sans-serif;
+  --f-body: "Barlow", system-ui, sans-serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--navy); color: var(--bone); font-family: var(--f-body); font-size: 16px; line-height: 1.55; }
+a { color: var(--orange-soft); }
+a:focus-visible, button:focus-visible, select:focus-visible, input:focus-visible { outline: 3px solid var(--cheese); outline-offset: 2px; }
+.wrap { max-width: 1120px; margin: 0 auto; padding-inline: 20px; }
+h1, h2, h3 { font-family: var(--f-display); font-weight: 400; letter-spacing: .01em; text-wrap: balance; margin: 0; line-height: 1; }
+h2 { font-size: clamp(32px, 5vw, 52px); text-transform: uppercase; }
+.eyebrow { font-family: var(--f-cond); font-weight: 700; text-transform: uppercase; letter-spacing: .14em; font-size: 14px; color: var(--orange-soft); }
+section { padding-block: 56px; border-top: 1px solid var(--line); }
+.lede { color: var(--muted); max-width: 62ch; margin: 12px 0 0; }
+
+/* ---------- HERO ---------- */
+.hero { padding-block: 40px 48px; position: relative; overflow: hidden; }
+.hero::before { content: ""; position: absolute; inset: 0; background:
+  repeating-linear-gradient(90deg, transparent 0 calc(10% - 2px), rgba(244,239,230,.05) calc(10% - 2px) 10%);
+  pointer-events: none; }
+.hero .wrap { position: relative; display: grid; gap: 28px; }
+.hero h1 { font-size: clamp(56px, 12vw, 148px); text-transform: uppercase; line-height: .88; }
+.hero h1 .o { color: var(--orange); }
+.hero h1 .strike { color: var(--muted); text-decoration: line-through; text-decoration-color: var(--orange); text-decoration-thickness: .08em; font-size: .42em; display: block; margin-top: .25em; }
+.matchup { display: flex; flex-wrap: wrap; gap: 12px 28px; align-items: center; font-family: var(--f-cond); font-weight: 700; text-transform: uppercase; letter-spacing: .06em; font-size: 18px; }
+.matchup .vs { background: var(--orange); color: var(--navy); padding: 4px 12px; font-family: var(--f-display); font-weight: 400; font-size: 22px; letter-spacing: .04em; }
+.countdown { display: flex; gap: 10px; flex-wrap: wrap; }
+.cd { background: var(--navy-2); border: 1px solid var(--line); padding: 10px 14px 8px; min-width: 84px; text-align: center; }
+.cd b { display: block; font-family: var(--f-display); font-weight: 400; font-size: 40px; line-height: 1; font-variant-numeric: tabular-nums; color: var(--bone); }
+.cd span { font-family: var(--f-cond); font-weight: 700; text-transform: uppercase; letter-spacing: .12em; font-size: 12px; color: var(--muted); }
+.cd-note { font-family: var(--f-cond); color: var(--muted); font-size: 15px; letter-spacing: .04em; margin: 0; }
+.ticker { background: var(--orange); color: var(--navy); font-family: var(--f-cond); font-weight: 800; text-transform: uppercase; letter-spacing: .06em; font-size: 17px; overflow: hidden; white-space: nowrap; border-block: 3px solid var(--navy); }
+.ticker-track { display: inline-block; padding-block: 8px; animation: tick 60s linear infinite; }
+.ticker-track span { padding-inline: 28px; }
+@keyframes tick { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+/* ---------- SHRINE ---------- */
+.shrine { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 32px; align-items: start; }
+.quote-card { background: var(--bone); color: var(--navy); padding: 28px 28px 24px; position: relative; transform: rotate(-1deg); box-shadow: 10px 10px 0 var(--orange); }
+.quote-card blockquote { margin: 0; font-family: var(--f-display); font-size: clamp(34px, 5.4vw, 60px); line-height: 1; text-transform: uppercase; }
+.quote-card blockquote em { font-style: normal; color: var(--orange); }
+.quote-card figcaption { margin-top: 16px; font-family: var(--f-cond); font-weight: 700; text-transform: uppercase; letter-spacing: .08em; font-size: 15px; }
+.play { display: inline-flex; align-items: center; gap: 10px; margin-top: 18px; background: var(--navy); color: var(--bone); text-decoration: none; padding: 12px 18px; font-family: var(--f-cond); font-weight: 800; text-transform: uppercase; letter-spacing: .08em; font-size: 16px; }
+.play:hover { background: var(--orange); color: var(--navy); }
+.play svg { width: 18px; height: 18px; fill: currentColor; }
+.facts { display: grid; gap: 14px; margin: 0; padding: 0; list-style: none; }
+.facts li { display: grid; grid-template-columns: 92px minmax(0,1fr); gap: 14px; align-items: baseline; padding-bottom: 14px; border-bottom: 1px solid var(--line); }
+.facts b { font-family: var(--f-display); font-weight: 400; font-size: 30px; color: var(--orange); line-height: 1; font-variant-numeric: tabular-nums; }
+.facts small { display: block; color: var(--muted); font-size: 13px; }
+
+/* ---------- PREDICTOR ---------- */
+.pred { display: grid; grid-template-columns: minmax(0, 340px) minmax(0, 1fr); gap: 28px; margin-top: 28px; align-items: start; }
+.controls { background: var(--navy-2); border: 1px solid var(--line); padding: 20px; display: grid; gap: 18px; }
+.field { display: grid; gap: 6px; }
+.field label, .field .lbl { font-family: var(--f-cond); font-weight: 700; text-transform: uppercase; letter-spacing: .1em; font-size: 13px; color: var(--muted); }
+select, input[type=range] { width: 100%; }
+select { background: var(--navy); color: var(--bone); border: 1px solid var(--line); padding: 10px; font: 500 15px var(--f-body); }
+input[type=range] { accent-color: var(--orange); }
+.range-val { font-family: var(--f-display); font-size: 22px; color: var(--orange); }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { border: 1px solid var(--line); background: var(--navy); color: var(--bone); padding: 8px 12px; font: 700 14px var(--f-cond); text-transform: uppercase; letter-spacing: .06em; cursor: pointer; }
+.chip[aria-pressed="true"] { background: var(--bone); color: var(--navy); border-color: var(--bone); }
+.chip[data-fan="nicole"][aria-pressed="true"] { background: #F7C6D4; border-color: #F7C6D4; }
+.go { background: var(--orange); color: var(--navy); border: 0; padding: 16px; font-family: var(--f-display); font-size: 24px; text-transform: uppercase; letter-spacing: .04em; cursor: pointer; }
+.go:hover { background: var(--orange-soft); }
+.go:active { transform: translateY(1px); }
+
+.result { display: grid; gap: 20px; min-width: 0; }
+.scoreboard { background: #050B16; border: 3px solid var(--navy-3); padding: 18px 20px; display: grid; gap: 10px; }
+.sb-row { display: grid; grid-template-columns: minmax(0,1fr) auto; align-items: center; gap: 12px; }
+.sb-team { font-family: var(--f-cond); font-weight: 800; text-transform: uppercase; letter-spacing: .06em; font-size: 22px; }
+.sb-team small { display: block; font-weight: 500; letter-spacing: .02em; text-transform: none; font-size: 14px; color: var(--muted); }
+.sb-score { font-family: var(--f-display); font-size: 64px; line-height: 1; font-variant-numeric: tabular-nums; color: var(--cheese); text-shadow: 0 0 18px rgba(242,194,48,.35); }
+.sb-row.gb .sb-score { color: var(--muted); text-shadow: none; }
+.sb-meta { display: flex; flex-wrap: wrap; gap: 8px 18px; font-family: var(--f-cond); font-weight: 700; text-transform: uppercase; letter-spacing: .08em; font-size: 14px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 10px; }
+.sb-meta b { color: var(--bone); }
+.prob { height: 14px; background: var(--gb-green); position: relative; }
+.prob i { position: absolute; inset: 0 auto 0 0; background: var(--orange); width: 100%; }
+.prob-lbl { display: flex; justify-content: space-between; font: 700 13px var(--f-cond); text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin-top: 4px; }
+
+.res-grid { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 20px; }
+.panel { background: var(--navy-2); border: 1px solid var(--line); padding: 18px 20px; min-width: 0; }
+.panel h3 { font-size: 22px; text-transform: uppercase; margin-bottom: 10px; }
+.keys { margin: 0; padding-left: 20px; display: grid; gap: 8px; }
+.fan-note { padding: 18px 20px; border-left: 6px solid var(--orange); background: var(--navy-2); }
+.fan-note.nicole { border-left-color: #F7C6D4; }
+.fan-note h3 { font-size: 22px; text-transform: uppercase; margin-bottom: 6px; }
+.fan-note p { margin: 0; }
+.vids { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.vid { display: grid; grid-template-columns: 56px minmax(0,1fr); gap: 12px; align-items: center; text-decoration: none; color: var(--bone); background: var(--navy); border: 1px solid var(--line); padding: 8px; }
+.vid:hover { border-color: var(--orange); }
+.thumb { aspect-ratio: 1; background: var(--orange); display: grid; place-items: center; max-width: 100%; }
+.thumb svg { width: 22px; height: 22px; fill: var(--navy); }
+.vid b { display: block; font-family: var(--f-cond); font-weight: 800; text-transform: uppercase; letter-spacing: .04em; font-size: 16px; line-height: 1.15; }
+.vid small { color: var(--muted); font-size: 13px; }
+
+/* ---------- MEMES ---------- */
+.meme { position: relative; aspect-ratio: 1; max-width: 100%; overflow: hidden; display: grid; grid-template-rows: auto 1fr auto; text-align: center; padding: 12px; background: var(--navy-3); }
+.meme .t, .meme .b { font-family: var(--f-display); text-transform: uppercase; color: #fff; font-size: clamp(18px, 2.6vw, 28px); line-height: 1.02;
+  -webkit-text-stroke: 1.5px #000; paint-order: stroke fill; text-shadow: 2px 2px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000; position: relative; z-index: 1; }
+.meme .art { display: grid; place-items: center; font-size: clamp(64px, 11vw, 120px); line-height: 1; }
+.meme .art.small { font-size: clamp(44px, 7vw, 76px); }
+.meme .wm { position: absolute; right: 8px; bottom: 4px; font: 500 10px var(--f-body); color: rgba(255,255,255,.55); z-index: 1; }
+.bg-fire { background: radial-gradient(circle at 50% 120%, #FFB000 0, #E2550F 35%, #5A1405 75%); }
+.bg-green { background: linear-gradient(160deg, #2E5E40, #16301F); }
+.bg-cheese { background: repeating-radial-gradient(circle at 30% 40%, #F2C230 0 18px, #D9A61A 18px 22px); }
+.bg-navy { background: linear-gradient(180deg, #1C2F52, #0B162A); }
+.bg-ice { background: linear-gradient(180deg, #CFE3F2, #7FA6C7); }
+.bg-drake { background: var(--bone); padding: 0; grid-template-rows: 1fr 1fr; grid-template-columns: 42% 58%; text-align: left; }
+.bg-drake .cell { display: grid; place-items: center; font-size: clamp(40px, 7vw, 72px); border-bottom: 2px solid #000; }
+.bg-drake .cell.txt { font: 400 clamp(17px, 2.3vw, 24px)/1.05 var(--f-display); text-transform: uppercase; color: #111; padding: 10px; place-items: center start; }
+.bg-drake .cell.a { background: #F2C230; }
+.bg-drake .cell.c { background: #FF8A4C; }
+.result .meme { max-width: 420px; }
+.memewall { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 18px; margin-top: 28px; }
+
+/* ---------- COWORKERS ---------- */
+.cowork { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 24px; margin-top: 28px; }
+.dossier { padding: 22px; border: 1px solid var(--line); background: var(--navy-2); display: grid; gap: 12px; align-content: start; }
+.dossier.nicole { background: #2A2233; border-color: rgba(247,198,212,.35); }
+.dossier h3 { font-size: 40px; text-transform: uppercase; }
+.stamp { display: inline-block; font: 800 13px var(--f-cond); text-transform: uppercase; letter-spacing: .12em; padding: 4px 10px; border: 2px solid currentColor; transform: rotate(-2deg); justify-self: start; }
+.dossier.minnow .stamp { color: var(--orange); }
+.dossier.nicole .stamp { color: #F7C6D4; }
+.dl { display: grid; grid-template-columns: 130px minmax(0,1fr); gap: 6px 14px; margin: 0; }
+.dl dt { font: 700 13px var(--f-cond); text-transform: uppercase; letter-spacing: .1em; color: var(--muted); padding-top: 3px; }
+.dl dd { margin: 0; }
+
+/* ---------- SUCK INDEX ---------- */
+.index { display: grid; gap: 12px; margin-top: 24px; max-width: 760px; }
+.bar-row { display: grid; grid-template-columns: minmax(0, 220px) minmax(0,1fr) 56px; gap: 14px; align-items: center; }
+.bar-row span { font-family: var(--f-cond); font-weight: 700; text-transform: uppercase; letter-spacing: .04em; font-size: 15px; }
+.bar { height: 22px; background: var(--navy-2); border: 1px solid var(--line); }
+.bar i { display: block; height: 100%; background: linear-gradient(90deg, var(--gb-green), var(--cheese)); }
+.bar-row b { font-family: var(--f-display); font-weight: 400; font-size: 20px; color: var(--cheese); text-align: right; font-variant-numeric: tabular-nums; }
+
+
+/* ---------- CHEESE GRATERS ---------- */
+.grater-defs { position: absolute; width: 0; height: 0; }
+.hero-grater { position: absolute; right: 2%; top: 18px; width: clamp(110px, 20vw, 230px); opacity: .95; transform: rotate(12deg); }
+.hero-grater .shreds { animation: fall 2.4s linear infinite; }
+@keyframes fall { from { transform: translateY(-6px); opacity: 1; } to { transform: translateY(26px); opacity: 0; } }
+.grater-rule { display: flex; justify-content: center; gap: 22px; padding-block: 14px; background: var(--navy-2); border-block: 4px solid var(--orange); overflow: hidden; }
+.grater-rule svg { width: 34px; height: 46px; flex: none; }
+.grater-rule svg:nth-child(even) { transform: rotate(-10deg); }
+.grater-rule svg:nth-child(odd) { transform: rotate(8deg); }
+.brigade { display: grid; grid-template-columns: 160px minmax(0,1fr); gap: 24px; align-items: center; margin-top: 24px; background: var(--orange); color: var(--navy); padding: 22px; }
+.brigade svg { width: 100%; max-width: 160px; height: auto; }
+.brigade h3 { font-size: clamp(26px, 4vw, 40px); text-transform: uppercase; }
+.brigade p { margin: 8px 0 0; font-weight: 500; max-width: 62ch; }
+@media (max-width: 520px) { .brigade { grid-template-columns: minmax(0,1fr); } .brigade svg { max-width: 110px; } .hero-grater { opacity: .35; } }
+@media (prefers-reduced-motion: reduce) { .hero-grater .shreds { animation: none; } }
+
+footer { border-top: 1px solid var(--line); padding-block: 28px 40px; color: var(--muted); font-size: 14px; }
+footer p { max-width: 75ch; }
+
+@media (max-width: 860px) {
+  .shrine, .pred, .cowork, .res-grid { grid-template-columns: minmax(0,1fr); }
+  .memewall { grid-template-columns: repeat(2, minmax(0,1fr)); }
+}
+@media (max-width: 520px) {
+  .wrap { padding-inline: 16px; }
+  .memewall { grid-template-columns: minmax(0,1fr); }
+  .bar-row { grid-template-columns: minmax(0,1fr) 48px; }
+  .bar-row .bar { grid-column: 1 / -1; grid-row: 2; }
+  .dl { grid-template-columns: minmax(0,1fr); }
+  .sb-score { font-size: 52px; }
+  .facts li { grid-template-columns: 72px minmax(0,1fr); }
+}
+@media (prefers-reduced-motion: reduce) { .ticker-track { animation: none; } }
+</style>
+</head>
+<body>
+
+<svg class="grater-defs" aria-hidden="true" focusable="false">
+  <defs>
+    <pattern id="holes" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M2 6 q3 -5 6 0 z" fill="#0B162A"/></pattern>
+    <symbol id="grater" viewBox="0 0 60 80">
+      <rect x="20" y="0" width="20" height="12" rx="6" fill="none" stroke="#C83803" stroke-width="5"/>
+      <path d="M14 12 h32 l8 64 h-48 z" fill="#C9D2DE" stroke="#0B162A" stroke-width="2"/>
+      <path d="M14 12 h32 l8 64 h-48 z" fill="url(#holes)" opacity=".85"/>
+      <rect x="6" y="72" width="48" height="6" rx="2" fill="#C83803"/>
+    </symbol>
+  </defs>
+</svg>
+<header class="hero">
+    <svg class="hero-grater" viewBox="0 0 140 170" aria-hidden="true">
+      <use href="#grater" x="10" y="0" width="90" height="120"/>
+      <path d="M92 70 l40 -22 l6 34 z" fill="#F2C230" stroke="#0B162A" stroke-width="2"/>
+      <circle cx="118" cy="66" r="3" fill="#D9A61A"/><circle cx="128" cy="74" r="2.5" fill="#D9A61A"/>
+      <g class="shreds" fill="#F2C230">
+        <rect x="40" y="128" width="3" height="12" rx="1.5" transform="rotate(20 40 128)"/>
+        <rect x="56" y="132" width="3" height="10" rx="1.5" transform="rotate(-15 56 132)"/>
+        <rect x="70" y="126" width="3" height="13" rx="1.5" transform="rotate(35 70 126)"/>
+        <rect x="48" y="146" width="3" height="9" rx="1.5" transform="rotate(-30 48 146)"/>
+        <rect x="64" y="150" width="3" height="11" rx="1.5" transform="rotate(10 64 150)"/>
+      </g>
+    </svg>
+  <div class="wrap">
+    <div class="eyebrow">Week 5 · Sunday, Oct 11, 2026 · Lambeau Field · Noon CT on FOX</div>
+    <h1>Da <span class="o">Bears</span>.<br>Da <span class="o">Coach</span>.<span class="strike">Da Packers (lol)</span></h1>
+    <div class="matchup">
+      <span>Chicago Bears</span><span class="vs">AT</span><span>Green Bay Cheese Co-op</span>
+    </div>
+    <div>
+      <div class="countdown" id="countdown" aria-live="polite">
+        <div class="cd"><b id="cd-d">--</b><span>Days</span></div>
+        <div class="cd"><b id="cd-h">--</b><span>Hours</span></div>
+        <div class="cd"><b id="cd-m">--</b><span>Min</span></div>
+        <div class="cd"><b id="cd-s">--</b><span>Sec</span></div>
+      </div>
+      <p class="cd-note" id="cd-note">Until Green Bay's next disappointment. Kickoff noon Central.</p>
+    </div>
+  </div>
+</header>
+
+<div class="ticker" aria-hidden="true"><div class="ticker-track">
+  <span>Wild Card: Bears 31, Packers 27 ★</span><span>Ben Johnson: still not sorry ★</span><span>Packers fans report "it's fine" while visibly not fine ★</span><span>Lambeau concession stands now selling tissues ★</span><span>Bears 31, Packers 27 (we will keep saying it) ★</span><span>Minnow seen googling "how to be a Lions fan" ★</span><span>Cheese grater sales up 400% in Chicagoland ★</span>
+  <span>Wild Card: Bears 31, Packers 27 ★</span><span>Ben Johnson: still not sorry ★</span><span>Packers fans report "it's fine" while visibly not fine ★</span><span>Lambeau concession stands now selling tissues ★</span><span>Bears 31, Packers 27 (we will keep saying it) ★</span><span>Minnow seen googling "how to be a Lions fan" ★</span><span>Cheese grater sales up 400% in Chicagoland ★</span>
+</div></div>
+
+<main>
+<section>
+  <div class="wrap">
+    <div class="eyebrow">The Shrine</div>
+    <h2>Ben Johnson, Head Coach &amp; Poet Laureate</h2>
+    <p class="lede">After the Bears came back to beat Green Bay 31–27 in the NFC Wild Card round at Soldier Field, Ben Johnson walked into the locker room and delivered the finest speech in Chicago history since the Gettysburg Address (which was not given in Chicago, but should have been).</p>
+    <div class="shrine" style="margin-top:28px">
+      <figure class="quote-card" style="margin:0">
+        <blockquote>"F*** the <em>Packers!</em> F*** 'em!"</blockquote>
+        <figcaption>— Ben Johnson, Soldier Field locker room, January 2026. He was asked to apologize. He did not.</figcaption>
+        <a class="play" href="https://www.youtube.com/results?search_query=ben+johnson+f+the+packers+locker+room+speech" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4v16l13-8z"/></svg>Watch the speech (YouTube)
+        </a>
+      </figure>
+      <ul class="facts">
+        <li><b>0</b><div>Apologies issued<small>"I don't like that team." Chairman George McCaskey reportedly agreed.</small></div></li>
+        <li><b>1</b><div>Handshakes with LaFleur that qualified as a flyover<small>The man treated it like an O'Hare go-around.</small></div></li>
+        <li><b>31</b><div>Points dropped on Green Bay in the playoffs<small>Also the number of times Minnow has said "we'll get 'em next year."</small></div></li>
+        <li><b>∞</b><div>Packers players who called him a "troll"<small>Close. Trolls live under bridges. Packers fans live under .500 vibes.</small></div></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="grater-rule" aria-hidden="true"><svg><use href="#grater"/></svg><svg><use href="#grater"/></svg><svg><use href="#grater"/></svg><svg><use href="#grater"/></svg><svg><use href="#grater"/></svg><svg><use href="#grater"/></svg><svg><use href="#grater"/></svg><svg><use href="#grater"/></svg><svg><use href="#grater"/></svg><svg><use href="#grater"/></svg><svg><use href="#grater"/></svg><svg><use href="#grater"/></svg><svg><use href="#grater"/></svg><svg><use href="#grater"/></svg></div>
+<section id="predictor">
+  <div class="wrap">
+    <div class="eyebrow">Proprietary Algorithm · 100% Peer-Reviewed by Bears Fans</div>
+    <h2>The Bear-Biased Game Predictor</h2>
+    <p class="lede">Adjust the variables below. Science demands we tell you they do not affect who wins. They only affect how badly.</p>
+
+    <div class="pred">
+      <form class="controls" id="predForm">
+        <div class="field">
+          <span class="lbl" id="fanLbl">Packers fan to deliver results to</span>
+          <div class="chips" role="group" aria-labelledby="fanLbl">
+            <button type="button" class="chip" data-fan="minnow" aria-pressed="true">Minnow</button>
+            <button type="button" class="chip" data-fan="nicole" aria-pressed="false">Nicole</button>
+            <button type="button" class="chip" data-fan="any" aria-pressed="false">Any Cheesehead</button>
+          </div>
+        </div>
+        <div class="field">
+          <label for="qb">Caleb Williams' hamstring</label>
+          <select id="qb">
+            <option value="out">Out (Bears spotting GB a QB out of pity)</option>
+            <option value="q">Questionable (Packers questionable always)</option>
+            <option value="full">100% healed (merciless mode)</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="wx">Lambeau conditions</label>
+          <select id="wx">
+            <option value="sun">Sunny October afternoon</option>
+            <option value="tundra">"Frozen Tundra" (it's October, relax)</option>
+            <option value="brat">Dense brat smoke from parking lot</option>
+            <option value="tears">Light drizzle of Packers fan tears</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="dis">Disrespect level <span class="range-val" id="disVal">7</span></label>
+          <input type="range" id="dis" min="1" max="11" value="7">
+        </div>
+        <div class="field">
+          <label for="hats">Cheesehead hats in attendance</label>
+          <select id="hats">
+            <option value="few">A modest 40,000</option>
+            <option value="most" selected>Most of them (the foam supply chain is stressed)</option>
+            <option value="all">All 81,441. Even the babies.</option>
+          </select>
+        </div>
+        <button type="submit" class="go" id="goBtn">Run Simulation</button>
+      </form>
+
+      <div class="result" id="result" aria-live="polite">
+        <div class="scoreboard">
+          <div class="eyebrow" id="simLabel">Simulation #1 of 1 (we only needed one)</div>
+          <div class="sb-row"><div class="sb-team">Chicago Bears<small id="bearsNote">Monsters of the Midway</small></div><div class="sb-score" id="bScore">38</div></div>
+          <div class="sb-row gb"><div class="sb-team">Green Bay Packers<small id="gbNote">Monsters of the Mid-Tier</small></div><div class="sb-score" id="pScore">10</div></div>
+          <div>
+            <div class="prob"><i id="probBar"></i></div>
+            <div class="prob-lbl"><span id="probB">CHI 100.0%</span><span id="probP">GB 0.0%</span></div>
+          </div>
+          <div class="sb-meta"><span>Spread <b id="spread">CHI −28</b></span><span>Over/Under <b id="ou">Packers' feelings: Under</b></span><span>Confidence <b id="conf">Smug</b></span></div>
+        </div>
+
+        <div class="fan-note" id="fanNote">
+          <h3 id="fanTitle">Dear Minnow,</h3>
+          <p id="fanMsg">Loading your humiliation…</p>
+        </div>
+
+        <div class="res-grid">
+          <div class="panel">
+            <h3>Keys to the Game</h3>
+            <ol class="keys" id="keys"></ol>
+          </div>
+          <div class="panel">
+            <h3>Today's Meme</h3>
+            <div id="resMeme"></div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h3>Required Viewing</h3>
+          <ul class="vids" id="resVids"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="grater-rule" aria-hidden="true"><svg><use href="#grater"/></svg><svg><use href="#grater"/></svg><svg><use href="#grater"/></svg><svg><use href="#grater"/></svg><svg><use href="#grater"/></svg><svg><use href="#grater"/></svg><svg><use href="#grater"/></svg><svg><use href="#grater"/></svg><svg><use href="#grater"/></svg><svg><use href="#grater"/></svg><svg><use href="#grater"/></svg><svg><use href="#grater"/></svg><svg><use href="#grater"/></svg><svg><use href="#grater"/></svg></div>
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Hall of Shame</div>
+    <h2>The Meme Wall</h2>
+    <p class="lede">Hand-crafted. Locally sourced. Gluten free, unlike every item sold at Lambeau.</p>
+    <div class="memewall" id="memewall"></div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Internal Affairs</div>
+    <h2>Known Packers Fans in the Workplace</h2>
+    <p class="lede">HR has asked us to clarify that these are friendly assessments. HR is also a Bears fan.</p>
+    <div class="brigade">
+      <svg viewBox="0 0 60 80" aria-hidden="true"><use href="#grater"/></svg>
+      <div>
+        <h3>The Cheese Grater Brigade</h3>
+        <p>Every Bears fan should own one cheese grater. Packers fans wear cheese on their heads. We bring the tool that reduces cheese to little pieces. Wear it as a hat, wave it at Lambeau, or set it on Minnow's keyboard Monday morning. Nicole gets hers gift-wrapped with a bow.</p>
+      </div>
+    </div>
+    <div class="cowork">
+      <article class="dossier minnow">
+        <span class="stamp">Threat level: Cheese Curd</span>
+        <h3>Minnow</h3>
+        <dl class="dl">
+          <dt>Species</dt><dd>Small fish. Fitting, given the size of Green Bay's trophy case this decade.</dd>
+          <dt>Known for</dt><dd>Saying "Titletown" about a town whose last title predates most of his coffee mugs.</dd>
+          <dt>Coping method</dt><dd>Bringing up 1990s Favre highlights unprompted. The man lives in 1996 like it's a timeshare.</dd>
+          <dt>Monday forecast</dt><dd>Will arrive late, avoid eye contact, and claim he "didn't really watch the second half."</dd>
+          <dt>Recommended action</dt><dd>Leave a foam cheese wedge on his desk with a single tear drawn on it.</dd>
+        </dl>
+      </article>
+      <article class="dossier nicole">
+        <span class="stamp">Certified Sweetheart</span>
+        <h3>Nicole</h3>
+        <dl class="dl">
+          <dt>Species</dt><dd>A genuinely lovely human being who was simply raised wrong. Not her fault.</dd>
+          <dt>Known for</dt><dd>Being kind, being thoughtful, and owning a jersey that is the only flaw in an otherwise perfect resume.</dd>
+          <dt>Coping method</dt><dd>Grace. Unlike certain other Packers fans in this office, she loses with dignity.</dd>
+          <dt>Monday forecast</dt><dd>Will say "good game" and mean it. Bring her a coffee. She deserves better than what Green Bay is giving her.</dd>
+          <dt>Recommended action</dt><dd>A standing invitation to convert. Navy and orange would look great on her. The door is always open, Nicole.</dd>
+        </dl>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Independent Research (We Made It Up)</div>
+    <h2>Green Bay Suck Index™</h2>
+    <p class="lede">Measured on a scale of 0 to "Minnow's fantasy team."</p>
+    <div class="index" id="index"></div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p><strong>Satire.</strong> Scores are fictional, predictions are rigged, and the algorithm is just a Bears fan yelling. Real facts: the Bears beat Green Bay 31–27 in the January 2026 Wild Card round, Ben Johnson's locker-room speech went viral and he declined to apologize, and this week's game kicks off Sunday, October 11 at noon CT at Lambeau on FOX.</p>
+    <p>Sources: <a href="https://www.si.com/nfl/bears/onsi/no-backtracking-by-ben-johnson-on-postgame-rant-about-packers" target="_blank" rel="noopener">SI</a> · <a href="https://africa.espn.com/nfl/story/_/id/47591743/ben-johnson-not-sorry-packers-rant-team" target="_blank" rel="noopener">ESPN</a> · <a href="https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/bears-packers-game-in-week-5-moved-to-1-p-m-et-kickoff" target="_blank" rel="noopener">PFT on the kickoff change</a></p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  // ---------- Countdown ----------
+  var KICK = Date.UTC(2026, 9, 11, 17, 0, 0); // noon CDT
+  function pad(n) { return String(n).padStart(2, "0"); }
+  function tickCd() {
+    var ms = KICK - Date.now();
+    if (ms <= 0) {
+      ["d","h","m","s"].forEach(function (k) { document.getElementById("cd-" + k).textContent = "00"; });
+      document.getElementById("cd-note").textContent = "It's happening. Somewhere in Wisconsin, Minnow is already making excuses.";
+      return;
+    }
+    var s = Math.floor(ms / 1000);
+    document.getElementById("cd-d").textContent = pad(Math.floor(s / 86400));
+    document.getElementById("cd-h").textContent = pad(Math.floor(s % 86400 / 3600));
+    document.getElementById("cd-m").textContent = pad(Math.floor(s % 3600 / 60));
+    document.getElementById("cd-s").textContent = pad(s % 60);
+    setTimeout(tickCd, 1000);
+  }
+  tickCd();
+
+  // ---------- Memes ----------
+  var MEMES = [
+    { bg: "bg-fire", t: "Ben Johnson walking into the locker room", art: "🐻🎤", b: "Mic: dropped. Packers: also dropped." },
+    { bg: "bg-cheese", t: "Packers fans wearing cheese on their heads", art: "🧀🤡", b: "Then asking why nobody takes them seriously" },
+    { bg: "bg-green", t: "Green Bay offseason: \"This is our year\"", art: "📉", b: "Green Bay January: \"Wait till next year\"" },
+    { drake: true, no: "Saying sorry to Green Bay", yes: "Saying it again, louder", a: "🙅", c: "😎" },
+    { bg: "bg-navy", t: "Nobody:", art: "🐟", small: false, b: "Minnow: \"Well actually in 1996…\"" },
+    { bg: "bg-ice", t: "The Frozen Tundra", art: "🥶", b: "Is just the Packers' playoff hopes" },
+    { bg: "bg-fire", t: "Packers defense trying to stop the Bears", art: "🧱💨", b: "Swiss cheese. Wrong state, same holes." },
+    { drake: true, no: "Calling Lambeau \"historic\"", yes: "Calling it \"a big frozen Culver's\"", a: "🏟️", c: "🍦" },
+    { bg: "bg-green", t: "LaFleur reaching for the handshake", art: "🤝✈️", b: "Ben Johnson already at the bus" },
+    { bg: "bg-cheese", t: "Me explaining to Nicole she's too nice to be a Packers fan", art: "🫶", b: "Offer stands. Orange looks good on you." },
+    { bg: "bg-navy", t: "31 - 27", art: "🐻", b: "That's it. That's the meme." },
+    { bg: "bg-green", t: "Packers fans after the Wild Card game", art: "🧀😭", b: "Brie-reaving" },
+    { bg: "bg-fire", grater: true, t: "Cheesehead walks into Soldier Field", b: "Bears fans: *pull out the grater*" },
+    { drake: true, no: "Wearing a foam cheese hat", yes: "Wearing a cheese grater hat", a: "🧀", c: "GRATER" }
+  ];
+  function memeHTML(m) {
+    if (m.drake) {
+      return '<div class="meme bg-drake" role="img" aria-label="Meme: no to ' + m.no + ', yes to ' + m.yes + '">' +
+        '<div class="cell a">' + m.a + '</div><div class="cell txt">' + m.no + '</div>' +
+        '<div class="cell c" style="border-bottom:0">' + (m.c === "GRATER" ? '<svg viewBox="0 0 60 80" style="width:46%;height:auto"><use href="#grater"/></svg>' : m.c) + '</div><div class="cell txt" style="border-bottom:0">' + m.yes + '</div></div>';
+    }
+    return '<div class="meme ' + m.bg + '" role="img" aria-label="Meme: ' + m.t + ' / ' + m.b + '">' +
+      '<div class="t">' + m.t + '</div><div class="art' + (m.art && m.art.length > 4 ? " small" : "") + '">' + (m.grater ? '<svg viewBox="0 0 60 80" style="width:42%;height:auto"><use href="#grater"/></svg>' : m.art) + '</div><div class="b">' + m.b + '</div>' +
+      '<span class="wm">dabears.meme</span></div>';
+  }
+  document.getElementById("memewall").innerHTML = MEMES.map(memeHTML).join("");
+
+  // ---------- Videos (link out; artifacts can't embed YouTube) ----------
+  function yt(q) { return "https://www.youtube.com/results?search_query=" + encodeURIComponent(q); }
+  var BEN = { t: "Ben Johnson: \"F*** the Packers\"", s: "The locker room speech. Required daily viewing.", u: yt("Ben Johnson f the Packers locker room") };
+  var VIDS = [
+    { t: "Bears 31, Packers 27: Wild Card highlights", s: "The comeback. Watch it with the sound up near Minnow's desk.", u: yt("Bears Packers wild card 31-27 highlights") },
+    { t: "Ben Johnson: \"I don't like that team\"", s: "The non-apology press conference. Poetry.", u: yt("Ben Johnson not sorry Packers press conference") },
+    { t: "The flyover handshake with Matt LaFleur", s: "Fastest handshake in NFL history.", u: yt("Ben Johnson Matt LaFleur handshake") },
+    { t: "The Super Bowl Shuffle (1985)", s: "Green Bay has never made a song this good.", u: yt("Super Bowl Shuffle 1985 Chicago Bears") },
+    { t: "SNL Superfans: \"Da Bears\"", s: "Ditka would beat a hurricane. And the Packers.", u: yt("SNL Bill Swerski Superfans Da Bears") },
+    { t: "Packers fans react to the Wild Card loss", s: "Bring a tissue. For laughing.", u: yt("Packers fans react wild card loss Bears") }
+  ];
+  var PLAY = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4v16l13-8z"/></svg>';
+  function vidHTML(v) {
+    return '<li><a class="vid" href="' + v.u + '" target="_blank" rel="noopener"><span class="thumb">' + PLAY + '</span><span><b>' + v.t + '</b><small>' + v.s + '</small></span></a></li>';
+  }
+
+  // ---------- Suck Index ----------
+  var IDX = [
+    ["Playoff composure", 94], ["Cheese-hat dignity", 99], ["Rivalry denial", 88],
+    ["Handshake readiness", 73], ["Minnow's hot takes", 100], ["Nicole's fault in any of this", 3]
+  ];
+  document.getElementById("index").innerHTML = IDX.map(function (r) {
+    return '<div class="bar-row"><span>' + r[0] + '</span><div class="bar"><i style="width:' + r[1] + '%"></i></div><b>' + r[1] + '</b></div>';
+  }).join("");
+
+  // ---------- Predictor ----------
+  var fan = "minnow", runs = 0;
+  document.querySelectorAll(".chip").forEach(function (c) {
+    c.addEventListener("click", function () {
+      fan = c.dataset.fan;
+      document.querySelectorAll(".chip").forEach(function (x) { x.setAttribute("aria-pressed", String(x === c)); });
+      predict();
+    });
+  });
+  var dis = document.getElementById("dis");
+  dis.addEventListener("input", function () { document.getElementById("disVal").textContent = dis.value; });
+
+  function pick(a) { return a[Math.floor(Math.random() * a.length)]; }
+  function rnd(lo, hi) { return lo + Math.floor(Math.random() * (hi - lo + 1)); }
+
+  var FAN_MSG = {
+    minnow: [
+      "Pack a lunch, little fish. Actually pack a few. You'll be eating your words all week, and that's not a filling meal.",
+      "Statistically, you have a better chance of being promoted to Shark than Green Bay has of winning this game.",
+      "Your team is like your nickname: small, slippery, and gone the moment something bigger shows up.",
+      "We've already printed the Monday morning sign for your desk. It just says \"31–27\" in very large font.",
+      "Please stop saying \"Discount Double Check.\" That was 2011. The discount has expired. So has the team."
+    ],
+    nicole: [
+      "Nicole, this is going to be a tough Sunday, and you don't deserve it. You're the nicest person in the building. Your team, unfortunately, is the Packers.",
+      "We're sorry in advance, Nicole. Honestly. If anyone at Lambeau deserves a win, it's you. They just aren't getting one.",
+      "Nicole, you have a kind heart and excellent taste in everything except football. We believe in your growth.",
+      "Nicole, when it's over, please know there's a seat on the Bears bandwagon with your name on it. It even has a cup holder."
+    ],
+    any: [
+      "Please remove your foam cheese before entering the reality that awaits you.",
+      "On behalf of Chicago: we're not sorry. Ben Johnson told us not to be.",
+      "Fun fact: the Packers are publicly owned, so this loss is technically your fault."
+    ]
+  };
+  var TITLES = { minnow: "Dear Minnow,", nicole: "Sweet Nicole,", any: "Attention Cheeseheads," };
+
+  var QB_KEY = {
+    out: ["Caleb is out, which is the Bears being polite. Green Bay still can't handle it.", "Backup QB throws for 300 yards. Packers secondary files a missing persons report on itself."],
+    q: ["Caleb plays on one good hamstring. One is plenty.", "Questionable tag removed the moment he saw the Packers on film."],
+    full: ["Fully healthy Caleb. We asked the league to check on the Packers' well-being at halftime.", "Caleb's hamstring is healed and also angry."]
+  };
+  var WX_KEY = {
+    sun: "Perfect weather, so Green Bay can't even blame the wind this time.",
+    tundra: "Packers fans insist it's the Frozen Tundra. It's 54 degrees. The only thing frozen is their offense.",
+    brat: "Brat smoke reduces visibility to 3 yards, which is also Green Bay's average gain per carry.",
+    tears: "Field slick with Packers fan tears. Bears adjust. Packers do not."
+  };
+  var HATS_KEY = {
+    few: "Only 40,000 cheeseheads. Lambeau sounds like a library, which is fitting since GB keeps living in history books.",
+    most: "Foam cheese visible from orbit. NASA confirms it is still not a good look.",
+    all: "81,441 cheese hats. Fire marshal concerned about dairy load on the upper deck."
+  };
+  var GENERIC = [
+    "Ben Johnson calls a trick play just to watch LaFleur's face.",
+    "Bears defense records 3 sacks and 1 emotional sack (Minnow).",
+    "Packers kicker shanks one wide. Wisconsin blames the brat smoke.",
+    "Johnson skips the handshake entirely and just waves from the tunnel.",
+    "Green Bay's longest drive of the day is the one home after the game.",
+    "Packers challenge a call. They lose that too.",
+    "Bears sideline hands out cheese graters at halftime. Packers fans feel targeted (they are)."
+  ];
+  var BNOTES = ["Monsters of the Midway", "Ben Johnson's personal army", "Certified Packer-haters", "31-27 Enjoyers"];
+  var GNOTES = ["Monsters of the Mid-Tier", "Publicly owned, publicly embarrassed", "Wisconsin's #2 export after cheese", "Brie-reaved", "Lactose intolerant to winning"];
+  var CONF = ["Smug", "Insufferable", "Ditka-level", "Unbearable (for them)", "Absolute"];
+  var GBPTS = [
+    [0, "Shutout. They tried their best (they did not)."],
+    [3, "One pity field goal, approved by Ben Johnson personally."],
+    [7, "One garbage-time TD. Minnow celebrated alone."],
+    [6, "A touchdown, then missed the extra point. Very on brand."],
+    [10, "Ten points, mostly from Bears being merciful."],
+    [2, "A safety. Their only safe thing all day."]
+  ];
+
+  function predict() {
+    runs++;
+    var d = +dis.value, qb = document.getElementById("qb").value;
+    var qbBoost = qb === "full" ? 10 : qb === "q" ? 5 : 0;
+    var g = pick(GBPTS);
+    var gb = g[0];
+    if (d >= 10) gb = Math.min(gb, 3);
+    var bears = Math.max(gb + 14, 24 + d * 3 + qbBoost + rnd(-3, 6));
+    if (d === 11) bears += 21;
+    var margin = bears - gb;
+
+    document.getElementById("bScore").textContent = bears;
+    document.getElementById("pScore").textContent = gb;
+    document.getElementById("gbNote").textContent = g[1];
+    document.getElementById("bearsNote").textContent = pick(BNOTES);
+    document.getElementById("simLabel").textContent = runs === 1
+      ? "Simulation #1 of 1 (we only needed one)"
+      : "Simulation #" + runs + ". Packers still lost every single one.";
+    var pct = d === 11 ? "112.0" : "100.0";
+    document.getElementById("probB").textContent = "CHI " + pct + "%";
+    document.getElementById("probP").textContent = d === 11 ? "GB −12.0% (owes us points)" : "GB 0.0%";
+    document.getElementById("spread").textContent = "CHI −" + margin;
+    document.getElementById("ou").textContent = pick(["Packers' feelings: Under", "Minnow excuses: Over", "Cheese consumed: Over", "Packers 1st downs: Under"]);
+    document.getElementById("conf").textContent = d === 11 ? "Beyond science" : pick(CONF);
+
+    var keys = [pick(QB_KEY[qb]), WX_KEY[document.getElementById("wx").value], HATS_KEY[document.getElementById("hats").value]];
+    var gen = GENERIC.slice().sort(function () { return Math.random() - .5; });
+    keys.push(gen[0], gen[1]);
+    if (d >= 9) keys.push("Disrespect at " + d + ": Bears go for two after every TD just to make a point.");
+    document.getElementById("keys").innerHTML = keys.map(function (k) { return "<li>" + k + "</li>"; }).join("");
+
+    var note = document.getElementById("fanNote");
+    note.className = "fan-note " + fan;
+    document.getElementById("fanTitle").textContent = TITLES[fan];
+    var msg = pick(FAN_MSG[fan]);
+    if (fan === "minnow" && d >= 9) msg += " Also, your desk plant is a Bears fan now. It told us.";
+    if (fan === "nicole") msg += " (Minnow, on the other hand, had this coming.)";
+    document.getElementById("fanMsg").textContent = msg;
+
+    var pool = MEMES.filter(function (m) { return fan === "nicole" || !/Nicole/.test(m.t || ""); });
+    if (fan === "nicole") pool = pool.filter(function (m) { return !/Minnow/.test((m.t || "") + (m.b || "")); });
+    document.getElementById("resMeme").innerHTML = memeHTML(pick(pool));
+
+    var others = VIDS.slice().sort(function () { return Math.random() - .5; }).slice(0, 2);
+    document.getElementById("resVids").innerHTML = [BEN].concat(others).map(vidHTML).join("");
+  }
+
+  document.getElementById("predForm").addEventListener("submit", function (e) { e.preventDefault(); predict(); });
+  predict();
+})();
+</script>
+</body>
+</html>
