@@ -357,6 +357,13 @@ footer p { max-width: 75ch; }
 @keyframes btfdText { 0% { color: var(--navy); text-shadow: none; } 50% { color: inherit; } }
 @keyframes btfdMid { 0% { color: var(--navy); -webkit-text-stroke-color: var(--navy); } 50% { color: rgba(226,85,15,.18); -webkit-text-stroke-color: var(--orange); } }
 @media (prefers-reduced-motion: reduce) { .btfd.flash, .btfd.flash * { animation: none !important; } }
+/* ---------- SACK WALL ---------- */
+.sacks { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 22px; margin-top: 30px; }
+.sack { margin: 0; display: grid; gap: 14px; min-width: 0; }
+.sack .vframe { box-shadow: 8px 8px 0 var(--orange); border-width: 3px; }
+.sack figcaption { font-size: 15px; color: var(--muted); line-height: 1.45; }
+.sack figcaption b { display: block; font: 400 26px var(--f-display); text-transform: uppercase; color: var(--bone); margin-bottom: 2px; }
+@media (max-width: 860px) { .sacks { grid-template-columns: minmax(0,1fr); } }
 /* ================= POLISH LAYER ================= */
 body { background:
   radial-gradient(1200px 600px at 85% -10%, rgba(226,85,15,.16), transparent 60%),
@@ -555,6 +562,28 @@ section h2::after { content: ""; position: absolute; left: 0; bottom: 0; width: 
           <a href="https://www.google.com/search?tbm=isch&amp;q=sad+packers+fans+wild+card+loss+bears" target="_blank" rel="noopener">Packers fan grief gallery</a>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<section id="sackwall">
+  <div class="wrap">
+    <div class="eyebrow">Three Generations of Green Bay Quarterbacks · One Result</div>
+    <h2>The Sack Wall</h2>
+    <p class="lede">Favre, Rodgers, Love. Different decades, different haircuts, same view of the sky courtesy of the Chicago Bears.</p>
+    <div class="sacks">
+      <figure class="sack">
+        <div class="vframe"><span class="live">Favre</span><div id="sackFavre"></div><a class="vfallback" id="sackFavreFb" hidden href="https://www.youtube.com/watch?v=ysGk7iMJZ-w" target="_blank" rel="noopener">Watch the Bears end Favre's career</a></div>
+        <figcaption><b>Brett Favre</b>Planted by the Bears in 2010. Never played another snap. You're welcome, NFL.</figcaption>
+      </figure>
+      <figure class="sack">
+        <div class="vframe"><span class="live">Rodgers</span><div id="sackRodgers"></div><a class="vfallback" id="sackRodgersFb" hidden href="https://www.youtube.com/watch?v=Bu0gD1-Ufx4" target="_blank" rel="noopener">Watch Khalil Mack sack Rodgers</a></div>
+        <figcaption><b>Aaron Rodgers</b>"I still own you." Khalil Mack disagreed, from directly on top of him.</figcaption>
+      </figure>
+      <figure class="sack">
+        <div class="vframe"><span class="live">Love</span><div id="sackLove"></div><a class="vfallback" id="sackLoveFb" hidden href="https://www.youtube.com/watch?v=tnX85oZOV40&amp;t=1100s" target="_blank" rel="noopener">Watch Love under pressure</a></div>
+        <figcaption><b>Jordan Love</b>Wild Card, Montez Sweat in his face. He threw it off the back of his own lineman. Season over.</figcaption>
+      </figure>
     </div>
   </div>
 </section>
@@ -1019,7 +1048,13 @@ section h2::after { content: ""; position: absolute; left: 0; bottom: 0; width: 
     { el: "benVid", fallback: "benFallback", clips: ["Sw0uqT9qWWc", "bZ6pKfyhyAE"], loop: true, start: 1, end: 20,
       vars: { autoplay: 1, mute: 1, controls: 0, rel: 0, playsinline: 1, modestbranding: 1, start: 1, end: 20 } },
     { el: "grateVid", fallback: "grateFallback", clips: ["Gkmj-8vICQI", "_-HLMiKG9Is", "ZaMd3mEG424", "ixapZx-uZbE"], loop: true,
-      vars: { autoplay: 1, mute: 1, controls: 0, rel: 0, playsinline: 1, modestbranding: 1 } }
+      vars: { autoplay: 1, mute: 1, controls: 0, rel: 0, playsinline: 1, modestbranding: 1 } },
+    { el: "sackFavre", fallback: "sackFavreFb", clips: ["ysGk7iMJZ-w", "uUiPBoM3oX4"], loop: true,
+      vars: { autoplay: 1, mute: 1, controls: 0, rel: 0, playsinline: 1, modestbranding: 1 } },
+    { el: "sackRodgers", fallback: "sackRodgersFb", clips: ["Bu0gD1-Ufx4", "jFS6HuLTvHw"], loop: true,
+      vars: { autoplay: 1, mute: 1, controls: 0, rel: 0, playsinline: 1, modestbranding: 1 } },
+    { el: "sackLove", fallback: "sackLoveFb", clips: ["tnX85oZOV40"], loop: true, start: 1100, end: 1116,
+      vars: { autoplay: 1, mute: 1, controls: 0, rel: 0, playsinline: 1, modestbranding: 1, start: 1100, end: 1116 } }
   ];
   function giveUp(slot) {
     var el = document.getElementById(slot.el); if (el) el.hidden = true;
