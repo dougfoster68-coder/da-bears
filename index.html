@@ -470,11 +470,6 @@ footer p { max-width: 75ch; }
           <div class="statwrap"><table class="stats" id="stats"></table></div>
         </div>
 
-        <div class="panel">
-          <h3>Most Likely Final Scores</h3>
-          <div id="dist"></div>
-        </div>
-
         <div class="res-grid">
           <div class="fan-note minnow"><h3>Dear Minnow,</h3><p id="minnowMsg"></p></div>
           <div class="fan-note nicole"><h3>Dear Nicole,</h3><p id="nicoleMsg"></p></div>
@@ -772,11 +767,6 @@ footer p { max-width: 75ch; }
         return '<tr><td>' + r[0] + '</td><td class="' + (chiEdge ? "edge" : "") + '">' + r[1] + '</td><td>' + r[2] + '</td></tr>';
       }).join("") + '</tbody>';
 
-    var outs = [[bears, gb], [bears + 7, gb], [bears - 3, gb - 3], [bears + 7, gb + 3]];
-    var pcts = [6.8, 5.1, 4.4, 3.9].map(function (x) { return x + Math.random() * 0.6; });
-    document.getElementById("dist").innerHTML = outs.map(function (o, i) {
-      return '<div class="dist-row"><span>CHI ' + o[0] + ', GB ' + o[1] + '</span><div class="bar"><i style="width:' + (pcts[i] / 7.4 * 100).toFixed(0) + '%"></i></div><b>' + pcts[i].toFixed(1) + '%</b></div>';
-    }).join("");
 
     var notes = [wx.note, wt.note].concat(NOTES.slice().sort(function () { return Math.random() - .5; }).slice(0, 3));
     if (hfa === 0) notes.push("Neutral-site setting removes Lambeau's home edge, widening Chicago's projected margin.");
