@@ -460,9 +460,9 @@ footer p { max-width: 75ch; }
           <div class="sb-row gb"><div class="sb-team"><img class="sb-logo gb" src="img/gb.png" alt="">Green Bay Packers<small id="gbNote"></small></div><div class="sb-score" id="pScore">20</div></div>
           <div>
             <div class="prob"><i id="probBar"></i></div>
-            <div class="prob-lbl"><span id="probB">CHI 78.4%</span><span id="probP">GB 21.6%</span></div>
+            <div class="prob-lbl"><span id="probB">CHI 96.2%</span><span id="probP">GB 3.8%</span></div>
           </div>
-          <div class="sb-meta"><span>Model line <b id="spread">CHI −6.5</b></span><span>Total <b id="ou">46.5</b></span><span>Confidence <b id="conf">High</b></span><span>Margin of error <b id="moe">±0.4%</b></span></div>
+          <div class="sb-meta"><span>Model line <b id="spread">CHI −17.5</b></span><span>Total <b id="ou">46.5</b></span><span>Confidence <b id="conf">High</b></span><span>Margin of error <b id="moe">±0.4%</b></span></div>
         </div>
 
         <div class="panel">
@@ -715,11 +715,11 @@ footer p { max-width: 75ch; }
     h2h: { adj: 2, note: "Head-to-head emphasis favors Chicago after last season's results, including the 31–27 Wild Card win." }
   };
   var NOTES = [
-    "Chicago's pass rush projects to generate pressure on 38% of Green Bay dropbacks, well above league average.",
+    "Chicago's pass rush projects to generate pressure on 44% of Green Bay dropbacks, the highest rate the model has produced this season.",
     "Ben Johnson's offense ranks among the league's best in early-down success rate, keeping third downs short.",
-    "Green Bay's projected turnover margin is negative. The model expects at least one Packers giveaway in 71% of simulations.",
+    "Green Bay's projected turnover margin is sharply negative. The model expects multiple Packers giveaways in 78% of simulations.",
     "Bears receivers project for a sizable edge in yards after catch against Green Bay's second-level defenders.",
-    "Late-game situations favor Chicago. The Bears won the fourth quarter in a large majority of close simulations.",
+    "Most simulations are decided by halftime. Chicago leads by two scores at the break in 81% of runs.",
     "Green Bay's red-zone touchdown rate projects below average, settling for field goals on most trips inside the 20."
   ];
   function fmt(n) { return n.toLocaleString("en-US"); }
@@ -734,11 +734,11 @@ footer p { max-width: 75ch; }
     var wx = WX[document.getElementById("wx").value], wt = WT[document.getElementById("wt").value];
     var hfa = +document.getElementById("hfa").value;
     // Bears edge before Lambeau home field is applied; always lands on a Bears win.
-    var edge = 7.5 + wx.adj + wt.adj - (hfa - 1.5) + (Math.random() * 3 - 1.5);
-    var total = 46 - (wx.adj * 2) + (Math.random() * 4 - 2);
+    var edge = 20 + wx.adj * 2 + wt.adj * 2 - (hfa - 1.5) + (Math.random() * 6 - 3);
+    var total = 48 - (wx.adj * 2) + (Math.random() * 4 - 2);
     var bears = Math.round((total + edge) / 2), gb = Math.round((total - edge) / 2);
-    if (bears - gb < 3) bears = gb + 3;
-    var winp = Math.min(91.8, 66 + edge * 1.9 + Math.random());
+    if (bears - gb < 14) bears = gb + 14;
+    var winp = Math.min(98.7, 84 + edge * 0.6 + Math.random());
     var line = Math.round(edge * 2) / 2;
 
     document.getElementById("bScore").textContent = bears;
@@ -751,16 +751,16 @@ footer p { max-width: 75ch; }
     document.getElementById("probP").textContent = "GB " + (100 - winp).toFixed(1) + "%";
     document.getElementById("spread").textContent = "CHI −" + line.toFixed(1);
     document.getElementById("ou").textContent = (Math.round(total * 2) / 2).toFixed(1);
-    document.getElementById("conf").textContent = winp > 80 ? "Very high" : "High";
+    document.getElementById("conf").textContent = winp > 96 ? "Extreme" : "Very high";
     document.getElementById("moe").textContent = "±" + (100 / Math.sqrt(sims) * 0.98).toFixed(1) + "%";
 
     var st = [
-      ["Passing yards", 248 + Math.round(edge * 3 + Math.random() * 20), 221 - Math.round(edge * 2 + Math.random() * 15)],
-      ["Rushing yards", 124 + Math.round(wx.adj * 6 + Math.random() * 15), 97 - Math.round(Math.random() * 12)],
-      ["Turnovers", (0.8 + Math.random() * 0.3).toFixed(1), (1.6 + Math.random() * 0.4).toFixed(1)],
-      ["Sacks", (3.1 + Math.random() * 0.8).toFixed(1), (1.4 + Math.random() * 0.6).toFixed(1)],
-      ["3rd-down conv.", (44 + Math.round(Math.random() * 5)) + "%", (34 + Math.round(Math.random() * 4)) + "%"],
-      ["Time of possession", "32:" + String(10 + Math.round(Math.random() * 40)).padStart(2, "0"), null]
+      ["Passing yards", 262 + Math.round(edge * 2.5 + Math.random() * 20), 214 - Math.round(edge * 2 + Math.random() * 15)],
+      ["Rushing yards", 141 + Math.round(wx.adj * 6 + Math.random() * 20), 78 - Math.round(Math.random() * 14)],
+      ["Turnovers", (0.5 + Math.random() * 0.3).toFixed(1), (2.3 + Math.random() * 0.5).toFixed(1)],
+      ["Sacks", (4.4 + Math.random() * 1.0).toFixed(1), (0.9 + Math.random() * 0.5).toFixed(1)],
+      ["3rd-down conv.", (49 + Math.round(Math.random() * 6)) + "%", (27 + Math.round(Math.random() * 5)) + "%"],
+      ["Time of possession", "35:" + String(Math.round(Math.random() * 50)).padStart(2, "0"), null]
     ];
     var top = st[5][1].split(":"); var sec = 3600 - (+top[0] * 60 + +top[1]);
     st[5][2] = Math.floor(sec / 60) + ":" + String(sec % 60).padStart(2, "0");
@@ -772,7 +772,7 @@ footer p { max-width: 75ch; }
         return '<tr><td>' + r[0] + '</td><td class="' + (chiEdge ? "edge" : "") + '">' + r[1] + '</td><td>' + r[2] + '</td></tr>';
       }).join("") + '</tbody>';
 
-    var outs = [[bears, gb], [bears + 3, gb], [bears - 3, gb - 3], [bears + 7, gb + 3]];
+    var outs = [[bears, gb], [bears + 7, gb], [bears - 3, gb - 3], [bears + 7, gb + 3]];
     var pcts = [6.8, 5.1, 4.4, 3.9].map(function (x) { return x + Math.random() * 0.6; });
     document.getElementById("dist").innerHTML = outs.map(function (o, i) {
       return '<div class="dist-row"><span>CHI ' + o[0] + ', GB ' + o[1] + '</span><div class="bar"><i style="width:' + (pcts[i] / 7.4 * 100).toFixed(0) + '%"></i></div><b>' + pcts[i].toFixed(1) + '%</b></div>';
