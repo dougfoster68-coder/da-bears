@@ -349,6 +349,13 @@ footer p { max-width: 75ch; }
   .cd { min-width: 0; flex: 1; padding: 8px 4px 6px; }
   .cd b { font-size: 32px; }
 }
+.btfd.flash { animation: btfdFlash .7s steps(1, end) 4; }
+.btfd.flash .l1, .btfd.flash .l3 { animation: btfdText .7s steps(1, end) 4; }
+.btfd.flash .l2 { animation: btfdMid .7s steps(1, end) 4; }
+@keyframes btfdFlash { 0% { background: var(--orange); } 50% { background: var(--navy); } }
+@keyframes btfdText { 0% { color: var(--navy); text-shadow: none; } 50% { color: inherit; } }
+@keyframes btfdMid { 0% { color: var(--navy); -webkit-text-stroke-color: var(--navy); } 50% { color: rgba(226,85,15,.18); -webkit-text-stroke-color: var(--orange); } }
+@media (prefers-reduced-motion: reduce) { .btfd.flash, .btfd.flash * { animation: none !important; } }
 /* ================= POLISH LAYER ================= */
 body { background:
   radial-gradient(1200px 600px at 85% -10%, rgba(226,85,15,.16), transparent 60%),
@@ -1125,6 +1132,18 @@ section h2::after { content: ""; position: absolute; left: 0; bottom: 0; width: 
     });
     mo.observe(el, { childList: true });
   });
+
+  // flash BEAR THE FUCK DOWN four times the first time it comes into view
+  var btfd = document.querySelector(".btfd");
+  if (btfd && "IntersectionObserver" in window) {
+    var bio = new IntersectionObserver(function (es) {
+      if (!es[0].isIntersecting) return;
+      bio.disconnect();
+      btfd.classList.add("flash");
+      setTimeout(function () { btfd.classList.remove("flash"); }, 3000);
+    }, { threshold: 0.6 });
+    bio.observe(btfd);
+  }
 
   // confetti in Bears colors after each simulation
   var cv = document.getElementById("confetti"), ctx = cv.getContext("2d"), parts = [], raf = 0;
