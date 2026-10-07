@@ -318,6 +318,33 @@ footer p { max-width: 75ch; }
 .btfd .l3 { color: var(--orange); text-shadow: 0 0 40px rgba(226,85,15,.45); }
 .btfd .l1, .btfd .l2, .btfd .l3 { transition: transform .4s ease; }
 .btfd:hover .l2 { color: var(--orange); }
+/* hero v2 */
+.kicker { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; }
+.pill { display: inline-flex; align-items: center; gap: 8px; background: var(--orange); color: var(--navy); padding: 5px 12px 4px; font: 800 13px var(--f-cond); text-transform: uppercase; letter-spacing: .14em; }
+.pill i { width: 8px; height: 8px; border-radius: 50%; background: var(--navy); animation: pulse 1.2s ease-in-out infinite; }
+@keyframes pulse { 50% { opacity: .2; } }
+.hero h1 { display: grid; line-height: .84; }
+.hero h1 .h-a { color: var(--bone); font-size: 1em; }
+.hero h1 .h-b { color: var(--orange); font-size: 1.04em; display: inline-block; animation: slam .7s cubic-bezier(.2,1.4,.4,1) .15s both, glow 3.2s ease-in-out 1.2s infinite alternate; }
+.hero-sub { margin: 0; max-width: 46ch; font-size: clamp(17px, 1.6vw, 20px); line-height: 1.45; color: var(--bone); opacity: .9; }
+.tape { display: grid; grid-template-columns: minmax(0,1fr) auto minmax(0,1fr); align-items: center; gap: 16px; max-width: 720px;
+  background: rgba(8,14,28,.72); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); border: 1px solid var(--line); border-left: 6px solid var(--orange); padding: 14px 18px; box-shadow: 0 16px 40px rgba(0,0,0,.35); }
+.tape .side { display: flex; align-items: center; gap: 12px; min-width: 0; }
+.tape .side.gb { justify-content: flex-end; text-align: right; }
+.tape .side img { width: 64px; height: 64px; flex: none; }
+.tape .side.gb img { filter: grayscale(1) opacity(.55); }
+.tape b { display: block; font: 800 19px/1.1 var(--f-cond); text-transform: uppercase; letter-spacing: .05em; }
+.tape small { display: block; font: 600 13px var(--f-cond); letter-spacing: .06em; color: var(--muted); text-transform: uppercase; margin-top: 3px; }
+.tape .side.chi small { color: var(--orange-soft); }
+.tape .mid { display: grid; justify-items: center; gap: 6px; }
+.tape .vs { background: var(--orange); color: var(--navy); padding: 4px 12px; font: 400 22px var(--f-display); letter-spacing: .04em; box-shadow: 0 0 0 3px var(--navy), 0 0 0 5px var(--orange); }
+.tape .mid small { white-space: nowrap; }
+@media (max-width: 600px) {
+  .tape { grid-template-columns: minmax(0,1fr); text-align: left; }
+  .tape .side.gb { justify-content: flex-start; flex-direction: row-reverse; text-align: left; }
+  .tape .mid { justify-items: start; grid-auto-flow: column; align-items: center; }
+  .tape .side img { width: 48px; height: 48px; }
+}
 /* ================= POLISH LAYER ================= */
 body { background:
   radial-gradient(1200px 600px at 85% -10%, rgba(226,85,15,.16), transparent 60%),
@@ -437,10 +464,13 @@ section h2::after { content: ""; position: absolute; left: 0; bottom: 0; width: 
       </g>
     </svg>
   <div class="wrap">
-    <div class="eyebrow">Week 5 · Sunday, Oct 11, 2026 · Lambeau Field · Noon CT on FOX</div>
-    <h1>Da <span class="o">Bears</span>.<br>Da <span class="o">Coach</span>.<span class="strike">Da Packers (lol)</span></h1>
-    <div class="matchup">
-      <span class="tm"><img src="img/chi.png" alt="" width="34" height="34">Chicago Bears</span><span class="vs">AT</span><span class="tm gb"><img src="img/gb.png" alt="" width="34" height="34">Green Bay Cheese Co-op</span>
+    <div class="kicker"><span class="pill"><i></i>Packers Week</span><span class="eyebrow">Week 5 · Sun, Oct 11 · Lambeau Field · Noon CT · FOX</span></div>
+    <h1><span class="h-a">Beat</span><span class="h-b">The Pack.</span></h1>
+    <p class="hero-sub">Ben Johnson vs. Matt LaFleur, round four. Ben leads 2–1, including the one that ended Green Bay's season. Same rivalry, same result. Bring a grater.</p>
+    <div class="tape">
+      <div class="side chi"><img src="img/chi.png" alt="Chicago Bears" width="72" height="72"><div><b>Chicago Bears</b><small>Last meeting: W 31–27</small></div></div>
+      <div class="mid"><span class="vs">AT</span><small>Lambeau · Noon CT</small></div>
+      <div class="side gb"><div><b>Green Bay Packers</b><small>Last meeting: L, season over</small></div><img src="img/gb.png" alt="Green Bay Packers" width="72" height="72"></div>
     </div>
     <div>
       <div class="countdown" id="countdown" aria-live="polite">
