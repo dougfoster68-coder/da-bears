@@ -1009,19 +1009,22 @@ section h2::after { content: ""; position: absolute; left: 0; bottom: 0; width: 
     });
   }
 
-  // count-up scores whenever the model writes new numbers
-  function countUp(el) {
-    var target = parseInt(el.textContent, 10); if (isNaN(target) || reduce) return;
-    var t0 = performance.now(), dur = 900;
-    (function step(now) {
-      var k = Math.min(1, (now - t0) / dur), v = Math.round(target * (1 - Math.pow(1 - k, 3)));
-      el.dataset.busy = "1"; el.textContent = v;
-      if (k < 1) requestAnimationFrame(step); else delete el.dataset.busy;
-    })(t0);
-  }
+  // count-up scores whenever the model writes new numbers (observer paused during our own writes)
   ["bScore", "pScore"].forEach(function (id) {
-    var el = document.getElementById(id);
-    new MutationObserver(function () { if (!el.dataset.busy) countUp(el); }).observe(el, { childList: true });
+    var el = document.getElementById(id), raf = 0;
+    var mo = new MutationObserver(function () {
+      var target = parseInt(el.textContent, 10);
+      if (isNaN(target) || reduce) return;
+      cancelAnimationFrame(raf); mo.disconnect();
+      var t0 = performance.now(), dur = 900;
+      (function step(now) {
+        var k = Math.min(1, (now - t0) / dur);
+        el.textContent = Math.round(target * (1 - Math.pow(1 - k, 3)));
+        if (k < 1) { raf = requestAnimationFrame(step); return; }
+        mo.takeRecords(); mo.observe(el, { childList: true });
+      })(t0);
+    });
+    mo.observe(el, { childList: true });
   });
 
   // confetti in Bears colors after each simulation
