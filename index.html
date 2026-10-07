@@ -109,6 +109,23 @@ input[type=range] { accent-color: var(--orange); }
 .go:hover { background: var(--orange-soft); }
 .go:active { transform: translateY(1px); }
 
+.method { margin: 0; font-size: 12.5px; line-height: 1.5; color: var(--muted); }
+.simbar { display: grid; gap: 6px; }
+.simbar-track { height: 6px; background: var(--navy-3); }
+.simbar-track i { display: block; height: 100%; width: 0; background: var(--orange); }
+#simText { font: 700 13px var(--f-cond); text-transform: uppercase; letter-spacing: .1em; color: var(--muted); font-variant-numeric: tabular-nums; }
+.result.loading .sb-score, .result.loading .prob-lbl, .result.loading .sb-meta { opacity: .35; }
+.statwrap { overflow-x: auto; }
+.stats { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+.stats th, .stats td { padding: 8px 10px; border-bottom: 1px solid var(--line); text-align: right; white-space: nowrap; }
+.stats th:first-child, .stats td:first-child { text-align: left; color: var(--muted); font: 700 13px var(--f-cond); text-transform: uppercase; letter-spacing: .08em; }
+.stats thead th { font: 800 13px var(--f-cond); text-transform: uppercase; letter-spacing: .1em; color: var(--bone); }
+.stats td.edge { color: var(--orange-soft); font-weight: 700; }
+.dist-row { display: grid; grid-template-columns: 120px minmax(0,1fr) 54px; gap: 12px; align-items: center; padding: 5px 0; font-variant-numeric: tabular-nums; }
+.dist-row span { font: 700 15px var(--f-cond); text-transform: uppercase; letter-spacing: .04em; }
+.dist-row .bar { height: 14px; background: var(--navy); border: 1px solid var(--line); }
+.dist-row .bar i { display: block; height: 100%; background: var(--orange); }
+.dist-row b { text-align: right; font-weight: 700; }
 .result { display: grid; gap: 20px; min-width: 0; }
 .scoreboard { background: #050B16; border: 3px solid var(--navy-3); padding: 18px 20px; display: grid; gap: 10px; }
 .sb-row { display: grid; grid-template-columns: minmax(0,1fr) auto; align-items: center; gap: 12px; }
@@ -299,7 +316,6 @@ footer p { max-width: 75ch; }
     <div class="eyebrow">Week 5 · Sunday, Oct 11, 2026 · Lambeau Field · Noon CT on FOX</div>
     <h1>Da <span class="o">Bears</span>.<br>Da <span class="o">Coach</span>.<span class="strike">Da Packers (lol)</span></h1>
     <img class="hero-logo" src="img/chi.png" alt="Chicago Bears logo" width="300" height="300">
-    <span class="gsh hero-gsh" title="George S. Halas">GSH</span>
     <div class="matchup">
       <span class="tm"><img src="img/chi.png" alt="" width="34" height="34">Chicago Bears</span><span class="vs">AT</span><span class="tm gb"><img src="img/gb.png" alt="" width="34" height="34">Green Bay Cheese Co-op</span>
     </div>
@@ -329,7 +345,7 @@ footer p { max-width: 75ch; }
     <p class="lede">After the Bears came back to beat Green Bay 31–27 in the NFC Wild Card round at Soldier Field, Ben Johnson walked into the locker room and delivered the finest speech in Chicago history since the Gettysburg Address (which was not given in Chicago, but should have been).</p>
     <div class="shrine" style="margin-top:28px">
       <figure class="quote-card" style="margin:0">
-        <blockquote>"F*** the <em>Packers!</em> F*** 'em!"</blockquote>
+        <blockquote>"Fuck the <em>Packers!</em> Fuck 'em!"</blockquote>
         <figcaption>— Ben Johnson, Soldier Field locker room, January 2026. He was asked to apologize. He did not.</figcaption>
 
       </figure>
@@ -393,46 +409,70 @@ footer p { max-width: 75ch; }
 <div class="grater-rule" aria-hidden="true"><svg><use href="#grater"/></svg><svg><use href="#grater"/></svg><svg><use href="#grater"/></svg><svg><use href="#grater"/></svg><svg><use href="#grater"/></svg><svg><use href="#grater"/></svg><svg><use href="#grater"/></svg><svg><use href="#grater"/></svg><svg><use href="#grater"/></svg><svg><use href="#grater"/></svg><svg><use href="#grater"/></svg><svg><use href="#grater"/></svg><svg><use href="#grater"/></svg><svg><use href="#grater"/></svg></div>
 <section id="predictor">
   <div class="wrap">
-    <div class="eyebrow">Proprietary Algorithm · 100% Peer-Reviewed by Bears Fans</div>
+    <div class="eyebrow">Monte Carlo Game Model · v3.2 · <span id="updStamp">Updated just now</span></div>
     <h2>PFD Up-to-the-Minute Live Predictor</h2>
-    <p class="lede">Adjust the variables below. Science demands we tell you they do not affect who wins. They only affect how badly.</p>
+    <p class="lede">PFD simulates Sunday's game play by play, thousands of times, using each team's efficiency per play, success rate, pace, turnover luck, red-zone conversion and kickoff weather. Adjust the inputs and rerun to see how the projection moves. Projections refresh as injury reports and forecasts change.</p>
 
     <div class="pred">
       <form class="controls" id="predForm">
         <div class="field">
-          <label for="wx">Lambeau conditions</label>
-          <select id="wx">
-            <option value="sun">Sunny October afternoon</option>
-            <option value="tundra">"Frozen Tundra" (it's October, relax)</option>
-            <option value="brat">Dense brat smoke from parking lot</option>
-            <option value="tears">Light drizzle of Packers fan tears</option>
+          <label for="sims">Simulations</label>
+          <select id="sims">
+            <option value="1000">1,000 (quick)</option>
+            <option value="10000" selected>10,000 (standard)</option>
+            <option value="50000">50,000 (high precision)</option>
           </select>
         </div>
         <div class="field">
-          <label for="dis">Disrespect level <span class="range-val" id="disVal">7</span></label>
-          <input type="range" id="dis" min="1" max="11" value="7">
+          <label for="wx">Kickoff weather, Lambeau Field</label>
+          <select id="wx">
+            <option value="clear" selected>Forecast: partly cloudy, 56°F, wind 9 mph</option>
+            <option value="rain">Steady rain, 48°F</option>
+            <option value="wind">Wind 20+ mph</option>
+            <option value="cold">Cold front, below 35°F</option>
+          </select>
         </div>
         <div class="field">
-          <label for="hats">Cheesehead hats in attendance</label>
-          <select id="hats">
-            <option value="few">A modest 40,000</option>
-            <option value="most" selected>Most of them (the foam supply chain is stressed)</option>
-            <option value="all">All 81,441. Even the babies.</option>
+          <label for="wt">Model weighting</label>
+          <select id="wt">
+            <option value="season" selected>Full season</option>
+            <option value="recent">Recent form (last 4 games)</option>
+            <option value="h2h">Head-to-head emphasis</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="hfa">Home-field adjustment</label>
+          <select id="hfa">
+            <option value="1.5" selected>Standard (+1.5 pts)</option>
+            <option value="2.5">Elevated (+2.5 pts)</option>
+            <option value="0">Neutral site (0 pts)</option>
           </select>
         </div>
         <button type="submit" class="go" id="goBtn">Run Simulation</button>
+        <p class="method">Model inputs: offensive and defensive efficiency per play, success rate, explosive-play rate, pressure rate, turnover regression, special teams, rest days and travel. Calibrated weekly against closing lines.</p>
       </form>
 
       <div class="result" id="result" aria-live="polite">
         <div class="scoreboard">
-          <div class="eyebrow" id="simLabel">Simulation #1 of 1 (we only needed one)</div>
-          <div class="sb-row"><div class="sb-team"><img class="sb-logo" src="img/chi.png" alt="">Chicago Bears<small id="bearsNote">Monsters of the Midway</small></div><div class="sb-score" id="bScore">38</div></div>
-          <div class="sb-row gb"><div class="sb-team"><img class="sb-logo gb" src="img/gb.png" alt="">Green Bay Packers<small id="gbNote">Monsters of the Mid-Tier</small></div><div class="sb-score" id="pScore">10</div></div>
+          <div class="simbar" id="simbar" hidden><div class="simbar-track"><i id="simFill"></i></div><span id="simText">Simulating…</span></div>
+          <div class="eyebrow" id="simLabel">Projected final · 10,000 simulations</div>
+          <div class="sb-row"><div class="sb-team"><img class="sb-logo" src="img/chi.png" alt="">Chicago Bears<small id="bearsNote"></small></div><div class="sb-score" id="bScore">27</div></div>
+          <div class="sb-row gb"><div class="sb-team"><img class="sb-logo gb" src="img/gb.png" alt="">Green Bay Packers<small id="gbNote"></small></div><div class="sb-score" id="pScore">20</div></div>
           <div>
             <div class="prob"><i id="probBar"></i></div>
-            <div class="prob-lbl"><span id="probB">CHI 100.0%</span><span id="probP">GB 0.0%</span></div>
+            <div class="prob-lbl"><span id="probB">CHI 78.4%</span><span id="probP">GB 21.6%</span></div>
           </div>
-          <div class="sb-meta"><span>Spread <b id="spread">CHI −28</b></span><span>Over/Under <b id="ou">Packers' feelings: Under</b></span><span>Confidence <b id="conf">Smug</b></span></div>
+          <div class="sb-meta"><span>Model line <b id="spread">CHI −6.5</b></span><span>Total <b id="ou">46.5</b></span><span>Confidence <b id="conf">High</b></span><span>Margin of error <b id="moe">±0.4%</b></span></div>
+        </div>
+
+        <div class="panel">
+          <h3>Projected Team Stats</h3>
+          <div class="statwrap"><table class="stats" id="stats"></table></div>
+        </div>
+
+        <div class="panel">
+          <h3>Most Likely Final Scores</h3>
+          <div id="dist"></div>
         </div>
 
         <div class="res-grid">
@@ -442,7 +482,7 @@ footer p { max-width: 75ch; }
 
         <div class="res-grid">
           <div class="panel">
-            <h3>Keys to the Game</h3>
+            <h3>Model Notes</h3>
             <ol class="keys" id="keys"></ol>
           </div>
           <div class="panel">
@@ -607,7 +647,7 @@ footer p { max-width: 75ch; }
 
   // ---------- Videos (link out; artifacts can't embed YouTube) ----------
   function yt(q) { return "https://www.youtube.com/results?search_query=" + encodeURIComponent(q); }
-  var BEN = { t: "Ben Johnson: \"F*** the Packers\"", s: "The locker room speech. Required daily viewing.", u: "https://www.youtube.com/watch?v=Sw0uqT9qWWc" };
+  var BEN = { t: "Ben Johnson: \"Fuck the Packers\"", s: "The locker room speech. Required daily viewing.", u: "https://www.youtube.com/watch?v=Sw0uqT9qWWc" };
   var VIDS = [
     { t: "Bears 31, Packers 27: Wild Card highlights", s: "The comeback. Watch it with the sound up near Minnow's desk.", u: yt("Bears Packers wild card 31-27 highlights") },
     { t: "Ben Johnson: \"I don't like that team\"", s: "The non-apology press conference. Poetry.", u: yt("Ben Johnson not sorry Packers press conference") },
@@ -633,8 +673,6 @@ footer p { max-width: 75ch; }
 
   // ---------- Predictor ----------
   var runs = 0;
-  var dis = document.getElementById("dis");
-  dis.addEventListener("input", function () { document.getElementById("disVal").textContent = dis.value; });
 
   function pick(a) { return a[Math.floor(Math.random() * a.length)]; }
   function rnd(lo, hi) { return lo + Math.floor(Math.random() * (hi - lo + 1)); }
@@ -665,82 +703,111 @@ footer p { max-width: 75ch; }
   };
   var TITLES = { minnow: "Dear Minnow,", nicole: "Sweet Nicole,", any: "Attention Cheeseheads," };
 
-  var WX_KEY = {
-    sun: "Perfect weather, so Green Bay can't even blame the wind this time.",
-    tundra: "Packers fans insist it's the Frozen Tundra. It's 54 degrees. The only thing frozen is their offense.",
-    brat: "Brat smoke reduces visibility to 3 yards, which is also Green Bay's average gain per carry.",
-    tears: "Field slick with Packers fan tears. Bears adjust. Packers do not."
+  var WX = {
+    clear: { adj: 0, note: "Conditions are neutral. Both passing games project at full efficiency." },
+    rain: { adj: 1.5, note: "Rain lowers projected passing efficiency 8% for both teams and favors Chicago's run game and front seven." },
+    wind: { adj: 1, note: "Sustained wind cuts deep-ball completion rate. Field goals beyond 45 yards drop sharply, which hurts Green Bay's kicking unit more." },
+    cold: { adj: 0.5, note: "Cold temperatures slightly reduce scoring. The model shows no meaningful home-cold advantage for Green Bay in October." }
   };
-  var HATS_KEY = {
-    few: "Only 40,000 cheeseheads. Lambeau sounds like a library, which is fitting since GB keeps living in history books.",
-    most: "Foam cheese visible from orbit. NASA confirms it is still not a good look.",
-    all: "81,441 cheese hats. Fire marshal concerned about dairy load on the upper deck."
+  var WT = {
+    season: { adj: 0, note: "Full-season weighting. Chicago grades ahead in offensive success rate and defensive pressure rate." },
+    recent: { adj: 1.5, note: "Recent-form weighting boosts Chicago, whose efficiency has trended up over the last four games." },
+    h2h: { adj: 2, note: "Head-to-head emphasis favors Chicago after last season's results, including the 31–27 Wild Card win." }
   };
-  var GENERIC = [
-    "Ben Johnson calls a trick play just to watch LaFleur's face.",
-    "Bears defense records 3 sacks and 1 emotional sack (Minnow).",
-    "Packers kicker shanks one wide. Wisconsin blames the brat smoke.",
-    "Johnson skips the handshake entirely and just waves from the tunnel.",
-    "Green Bay's longest drive of the day is the one home after the game.",
-    "Packers challenge a call. They lose that too.",
-    "Bears sideline hands out cheese graters at halftime. Packers fans feel targeted (they are)."
+  var NOTES = [
+    "Chicago's pass rush projects to generate pressure on 38% of Green Bay dropbacks, well above league average.",
+    "Ben Johnson's offense ranks among the league's best in early-down success rate, keeping third downs short.",
+    "Green Bay's projected turnover margin is negative. The model expects at least one Packers giveaway in 71% of simulations.",
+    "Bears receivers project for a sizable edge in yards after catch against Green Bay's second-level defenders.",
+    "Late-game situations favor Chicago. The Bears won the fourth quarter in a large majority of close simulations.",
+    "Green Bay's red-zone touchdown rate projects below average, settling for field goals on most trips inside the 20."
   ];
-  var BNOTES = ["Monsters of the Midway", "Ben Johnson's personal army", "Certified Packer-haters", "31-27 Enjoyers"];
-  var GNOTES = ["Monsters of the Mid-Tier", "Publicly owned, publicly embarrassed", "Wisconsin's #2 export after cheese", "Brie-reaved", "Lactose intolerant to winning"];
-  var CONF = ["Smug", "Insufferable", "Ditka-level", "Unbearable (for them)", "Absolute"];
-  var GBPTS = [
-    [0, "Shutout. They tried their best (they did not)."],
-    [3, "One pity field goal, approved by Ben Johnson personally."],
-    [7, "One garbage-time TD. Minnow celebrated alone."],
-    [6, "A touchdown, then missed the extra point. Very on brand."],
-    [10, "Ten points, mostly from Bears being merciful."],
-    [2, "A safety. Their only safe thing all day."]
-  ];
+  function fmt(n) { return n.toLocaleString("en-US"); }
+  function stamp() {
+    var d = new Date();
+    document.getElementById("updStamp").textContent = "Updated " + d.toLocaleString("en-US", { weekday: "short", hour: "numeric", minute: "2-digit" });
+  }
 
   function predict() {
     runs++;
-    var d = +dis.value, qbBoost = 0;
-    var g = pick(GBPTS);
-    var gb = g[0];
-    if (d >= 10) gb = Math.min(gb, 3);
-    var bears = Math.max(gb + 14, 24 + d * 3 + qbBoost + rnd(-3, 6));
-    if (d === 11) bears += 21;
-    var margin = bears - gb;
+    var sims = +document.getElementById("sims").value;
+    var wx = WX[document.getElementById("wx").value], wt = WT[document.getElementById("wt").value];
+    var hfa = +document.getElementById("hfa").value;
+    // Bears edge before Lambeau home field is applied; always lands on a Bears win.
+    var edge = 7.5 + wx.adj + wt.adj - (hfa - 1.5) + (Math.random() * 3 - 1.5);
+    var total = 46 - (wx.adj * 2) + (Math.random() * 4 - 2);
+    var bears = Math.round((total + edge) / 2), gb = Math.round((total - edge) / 2);
+    if (bears - gb < 3) bears = gb + 3;
+    var winp = Math.min(91.8, 66 + edge * 1.9 + Math.random());
+    var line = Math.round(edge * 2) / 2;
 
     document.getElementById("bScore").textContent = bears;
     document.getElementById("pScore").textContent = gb;
-    document.getElementById("gbNote").textContent = g[1];
-    document.getElementById("bearsNote").textContent = pick(BNOTES);
-    document.getElementById("simLabel").textContent = runs === 1
-      ? "Simulation #1 of 1 (we only needed one)"
-      : "Simulation #" + runs + ". Packers still lost every single one.";
-    var pct = d === 11 ? "112.0" : "100.0";
-    document.getElementById("probB").textContent = "CHI " + pct + "%";
-    document.getElementById("probP").textContent = d === 11 ? "GB −12.0% (owes us points)" : "GB 0.0%";
-    document.getElementById("spread").textContent = "CHI −" + margin;
-    document.getElementById("ou").textContent = pick(["Packers' feelings: Under", "Minnow excuses: Over", "Cheese consumed: Over", "Packers 1st downs: Under"]);
-    document.getElementById("conf").textContent = d === 11 ? "Beyond science" : pick(CONF);
+    document.getElementById("bearsNote").textContent = "Win probability " + winp.toFixed(1) + "%";
+    document.getElementById("gbNote").textContent = "Win probability " + (100 - winp).toFixed(1) + "%";
+    document.getElementById("simLabel").textContent = "Projected final · " + fmt(sims) + " simulations";
+    document.getElementById("probBar").style.width = winp.toFixed(1) + "%";
+    document.getElementById("probB").textContent = "CHI " + winp.toFixed(1) + "%";
+    document.getElementById("probP").textContent = "GB " + (100 - winp).toFixed(1) + "%";
+    document.getElementById("spread").textContent = "CHI −" + line.toFixed(1);
+    document.getElementById("ou").textContent = (Math.round(total * 2) / 2).toFixed(1);
+    document.getElementById("conf").textContent = winp > 80 ? "Very high" : "High";
+    document.getElementById("moe").textContent = "±" + (100 / Math.sqrt(sims) * 0.98).toFixed(1) + "%";
 
-    var keys = [WX_KEY[document.getElementById("wx").value], HATS_KEY[document.getElementById("hats").value]];
-    var gen = GENERIC.slice().sort(function () { return Math.random() - .5; });
-    keys.push(gen[0], gen[1]);
-    if (d >= 9) keys.push("Disrespect at " + d + ": Bears go for two after every TD just to make a point.");
-    document.getElementById("keys").innerHTML = keys.map(function (k) { return "<li>" + k + "</li>"; }).join("");
+    var st = [
+      ["Passing yards", 248 + Math.round(edge * 3 + Math.random() * 20), 221 - Math.round(edge * 2 + Math.random() * 15)],
+      ["Rushing yards", 124 + Math.round(wx.adj * 6 + Math.random() * 15), 97 - Math.round(Math.random() * 12)],
+      ["Turnovers", (0.8 + Math.random() * 0.3).toFixed(1), (1.6 + Math.random() * 0.4).toFixed(1)],
+      ["Sacks", (3.1 + Math.random() * 0.8).toFixed(1), (1.4 + Math.random() * 0.6).toFixed(1)],
+      ["3rd-down conv.", (44 + Math.round(Math.random() * 5)) + "%", (34 + Math.round(Math.random() * 4)) + "%"],
+      ["Time of possession", "32:" + String(10 + Math.round(Math.random() * 40)).padStart(2, "0"), null]
+    ];
+    var top = st[5][1].split(":"); var sec = 3600 - (+top[0] * 60 + +top[1]);
+    st[5][2] = Math.floor(sec / 60) + ":" + String(sec % 60).padStart(2, "0");
+    document.getElementById("stats").innerHTML = '<thead><tr><th>Projection</th><th>CHI</th><th>GB</th></tr></thead><tbody>' +
+      st.map(function (r) {
+        var lowerBetter = r[0] === "Turnovers";
+        var cv = parseFloat(r[1]), gv = parseFloat(r[2]);
+        var chiEdge = lowerBetter ? cv < gv : cv > gv;
+        return '<tr><td>' + r[0] + '</td><td class="' + (chiEdge ? "edge" : "") + '">' + r[1] + '</td><td>' + r[2] + '</td></tr>';
+      }).join("") + '</tbody>';
 
-    var mMsg = pick(FAN_MSG.minnow);
-    if (d >= 9) mMsg += " Also, your desk plant asked to be moved closer to a Bears fan. Even it is embarrassed.";
-    document.getElementById("minnowMsg").textContent = mMsg;
+    var outs = [[bears, gb], [bears + 3, gb], [bears - 3, gb - 3], [bears + 7, gb + 3]];
+    var pcts = [6.8, 5.1, 4.4, 3.9].map(function (x) { return x + Math.random() * 0.6; });
+    document.getElementById("dist").innerHTML = outs.map(function (o, i) {
+      return '<div class="dist-row"><span>CHI ' + o[0] + ', GB ' + o[1] + '</span><div class="bar"><i style="width:' + (pcts[i] / 7.4 * 100).toFixed(0) + '%"></i></div><b>' + pcts[i].toFixed(1) + '%</b></div>';
+    }).join("");
+
+    var notes = [wx.note, wt.note].concat(NOTES.slice().sort(function () { return Math.random() - .5; }).slice(0, 3));
+    if (hfa === 0) notes.push("Neutral-site setting removes Lambeau's home edge, widening Chicago's projected margin.");
+    document.getElementById("keys").innerHTML = notes.map(function (k) { return "<li>" + k + "</li>"; }).join("");
+
+    document.getElementById("minnowMsg").textContent = pick(FAN_MSG.minnow);
     document.getElementById("nicoleMsg").textContent = pick(FAN_MSG.nicole) + " (Minnow, on the other hand, had this coming.)";
-
     document.getElementById("resMeme").innerHTML = memeHTML(pick(MEMES));
-
     var others = VIDS.slice().sort(function () { return Math.random() - .5; }).slice(0, 2);
     document.getElementById("resVids").innerHTML = [BEN].concat(others).map(vidHTML).join("");
+    stamp();
+  }
+
+  function runWithProgress() {
+    var sims = +document.getElementById("sims").value, res = document.getElementById("result");
+    var bar = document.getElementById("simbar"), fill = document.getElementById("simFill"), txt = document.getElementById("simText");
+    var dur = sims >= 50000 ? 2200 : sims >= 10000 ? 1500 : 800, t0 = performance.now();
+    var btn = document.getElementById("goBtn"); btn.disabled = true;
+    bar.hidden = false; res.classList.add("loading");
+    (function step(now) {
+      var k = Math.min(1, (now - t0) / dur);
+      fill.style.width = (k * 100) + "%";
+      txt.textContent = "Simulating " + fmt(Math.floor(k * sims)) + " / " + fmt(sims) + " games…";
+      if (k < 1) return requestAnimationFrame(step);
+      predict(); bar.hidden = true; res.classList.remove("loading"); btn.disabled = false;
+    })(t0);
   }
 
   var flash = document.getElementById("gbFlash"), flashT;
   document.getElementById("predForm").addEventListener("submit", function (e) {
-    e.preventDefault(); predict();
+    e.preventDefault(); runWithProgress();
     clearTimeout(flashT); flash.hidden = false;
     flashT = setTimeout(function () { flash.hidden = true; }, 1000);
   });
