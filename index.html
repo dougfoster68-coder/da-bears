@@ -704,14 +704,6 @@ section h2::after { content: ""; position: absolute; left: 0; bottom: 0; width: 
   </div>
 </section>
 
-<section>
-  <div class="wrap">
-    <div class="eyebrow">Independent Research (We Made It Up)</div>
-    <h2>Green Bay Suck Index™</h2>
-    <p class="lede">Measured on a scale of 0 to "Minnow's fantasy team."</p>
-    <div class="index" id="index"></div>
-  </div>
-</section>
 <section class="btfd" aria-label="Bear the fuck down">
   <div class="btfd-inner">
     <span class="l1">Bear</span>
@@ -829,14 +821,6 @@ section h2::after { content: ""; position: absolute; left: 0; bottom: 0; width: 
     return '<li><a class="vid" href="' + v.u + '" target="_blank" rel="noopener"><span class="thumb">' + PLAY + '</span><span><b>' + v.t + '</b><small>' + v.s + '</small></span></a></li>';
   }
 
-  // ---------- Suck Index ----------
-  var IDX = [
-    ["Playoff composure", 94], ["Cheese-hat dignity", 99], ["Rivalry denial", 88],
-    ["Handshake readiness", 73], ["Minnow's hot takes", 100], ["Nicole's fault in any of this", 22]
-  ];
-  document.getElementById("index").innerHTML = IDX.map(function (r) {
-    return '<div class="bar-row"><span>' + r[0] + '</span><div class="bar"><i style="width:' + r[1] + '%"></i></div><b>' + r[1] + '</b></div>';
-  }).join("");
 
   // ---------- Predictor ----------
   var runs = 0;
