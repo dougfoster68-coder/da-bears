@@ -118,25 +118,65 @@ input[type=range] { accent-color: var(--orange); }
 .vid small { color: var(--muted); font-size: 13px; }
 
 /* ---------- MEMES ---------- */
-.meme { position: relative; aspect-ratio: 1; max-width: 100%; overflow: hidden; display: grid; grid-template-rows: auto 1fr auto; text-align: center; padding: 12px; background: var(--navy-3); }
-.meme .t, .meme .b { font-family: var(--f-display); text-transform: uppercase; color: #fff; font-size: clamp(18px, 2.6vw, 28px); line-height: 1.02;
-  -webkit-text-stroke: 1.5px #000; paint-order: stroke fill; text-shadow: 2px 2px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000; position: relative; z-index: 1; }
-.meme .art { display: grid; place-items: center; font-size: clamp(64px, 11vw, 120px); line-height: 1; }
-.meme .art.small { font-size: clamp(44px, 7vw, 76px); }
-.meme .wm { position: absolute; right: 8px; bottom: 4px; font: 500 10px var(--f-body); color: rgba(255,255,255,.55); z-index: 1; }
-.bg-fire { background: radial-gradient(circle at 50% 120%, #FFB000 0, #E2550F 35%, #5A1405 75%); }
-.bg-green { background: linear-gradient(160deg, #2E5E40, #16301F); }
-.bg-cheese { background: repeating-radial-gradient(circle at 30% 40%, #F2C230 0 18px, #D9A61A 18px 22px); }
-.bg-navy { background: linear-gradient(180deg, #1C2F52, #0B162A); }
-.bg-ice { background: linear-gradient(180deg, #CFE3F2, #7FA6C7); }
-.bg-drake { background: var(--bone); padding: 0; grid-template-rows: 1fr 1fr; grid-template-columns: 42% 58%; text-align: left; }
-.bg-drake .cell { display: grid; place-items: center; font-size: clamp(40px, 7vw, 72px); border-bottom: 2px solid #000; }
-.bg-drake .cell.txt { font: 400 clamp(17px, 2.3vw, 24px)/1.05 var(--f-display); text-transform: uppercase; color: #111; padding: 10px; place-items: center start; }
-.bg-drake .cell.a { background: #F2C230; }
-.bg-drake .cell.c { background: #FF8A4C; }
-.result .meme { max-width: 420px; }
-.memewall { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 18px; margin-top: 28px; }
+.memewall { columns: 3 300px; column-gap: 18px; margin-top: 28px; }
+.memewall > * { break-inside: avoid; margin-bottom: 18px; }
+.mm { width: 100%; max-width: 100%; font-family: var(--f-body); box-shadow: 0 10px 30px rgba(0,0,0,.35); }
+.result .mm { max-width: 440px; }
+.mm-search { background: #fff; color: #202124; border-radius: 22px; padding: 14px 0 10px; }
+.mm-search .q { display: flex; align-items: center; gap: 10px; padding: 0 18px 12px; border-bottom: 1px solid #e3e3e3; font-size: 17px; }
+.mm-search svg { width: 18px; height: 18px; flex: none; }
+.mm-search .q b { font-weight: 400; }
+.mm-search .q i { width: 2px; height: 20px; background: #1a73e8; animation: blink 1s steps(1) infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+.mm-search ul { list-style: none; margin: 0; padding: 6px 0 0; }
+.mm-search li { display: flex; gap: 12px; align-items: center; padding: 7px 18px; font-size: 16px; }
+.mm-search li svg { width: 15px; height: 15px; opacity: .6; }
+.mm-search li span { color: #5f6368; } .mm-search li strong { color: #202124; font-weight: 700; }
+.mm-texts { background: #fff; color: #000; border-radius: 26px; padding: 16px 14px 18px; display: grid; gap: 6px; font-size: 15.5px; line-height: 1.3; }
+.mm-texts .who { text-align: center; font-size: 12px; color: #8a8a8e; font-weight: 600; margin-bottom: 4px; }
+.mm-texts .who b { display: block; font-size: 15px; color: #000; }
+.mm-texts .ts { text-align: center; font-size: 11px; color: #8a8a8e; margin: 6px 0 2px; }
+.mm-texts .in, .mm-texts .out { max-width: 78%; padding: 8px 12px; border-radius: 18px; }
+.mm-texts .in { background: #E9E9EB; justify-self: start; border-bottom-left-radius: 5px; }
+.mm-texts .out { background: #0A7CFF; color: #fff; justify-self: end; border-bottom-right-radius: 5px; }
+.mm-texts .read { justify-self: end; font-size: 11px; color: #8a8a8e; font-weight: 600; }
+.mm-news { background: #F3EEE3; color: #161616; padding: 16px 18px 18px; font-family: Georgia, "Times New Roman", serif; }
+.mm-news .mast { text-align: center; font: 700 italic 26px Georgia, serif; border-bottom: 3px double #161616; padding-bottom: 6px; }
+.mm-news .date { display: flex; justify-content: space-between; font: 700 10px var(--f-cond); text-transform: uppercase; letter-spacing: .12em; border-bottom: 1px solid #161616; padding: 4px 0; margin-bottom: 10px; }
+.mm-news h4 { font: 700 clamp(22px, 2.6vw, 27px)/1.08 Georgia, serif; margin: 0 0 8px; text-wrap: balance; }
+.mm-news p { margin: 0; font-size: 14px; line-height: 1.45; columns: 2; column-gap: 14px; column-rule: 1px solid #c9c2b2; }
+.mm-wx { background: linear-gradient(180deg, #3A5F86, #1E3554); color: #fff; border-radius: 22px; padding: 18px 20px; }
+.mm-wx .loc { font-size: 22px; font-weight: 500; } .mm-wx .big { font: 400 64px/1 var(--f-display); margin: 4px 0; }
+.mm-wx .cond { font-weight: 700; } .mm-wx .hl { opacity: .8; font-size: 14px; }
+.mm-wx .alert { margin-top: 14px; background: rgba(226,85,15,.92); border-radius: 12px; padding: 10px 12px; font-size: 14px; }
+.mm-wx .alert b { display: block; font: 800 13px var(--f-cond); text-transform: uppercase; letter-spacing: .1em; }
+.mm-wx .hours { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 6px; margin-top: 12px; text-align: center; font-size: 12px; border-top: 1px solid rgba(255,255,255,.25); padding-top: 10px; }
+.mm-wx .hours b { display: block; font-size: 15px; margin-top: 2px; }
+.mm-ach { background: #111; color: #fff; border-radius: 999px; padding: 12px 22px 12px 12px; display: grid; grid-template-columns: 58px minmax(0,1fr); gap: 14px; align-items: center; border: 2px solid #2b2b2b; }
+.mm-ach .trophy { width: 58px; height: 58px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #FFB76B, var(--orange) 60%, #8A2D05); display: grid; place-items: center; font: 400 24px var(--f-display); color: var(--navy); }
+.mm-ach small { display: block; font: 700 12px var(--f-cond); text-transform: uppercase; letter-spacing: .14em; color: #9a9a9a; }
+.mm-ach b { display: block; font-size: 17px; line-height: 1.2; }
+.mm-ach span { font-size: 13px; color: #bdbdbd; }
+.mm-rcpt { background: #FBFBF7; color: #222; padding: 18px 20px 26px; font: 14px/1.5 "Courier New", Courier, monospace; text-transform: uppercase;
+  -webkit-mask: radial-gradient(circle 7px at 50% 100%, transparent 98%, #000) 0 0 / 18px 100% repeat-x; mask: radial-gradient(circle 7px at 50% 100%, transparent 98%, #000) 0 0 / 18px 100% repeat-x; }
+.mm-rcpt .c { text-align: center; } .mm-rcpt hr { border: 0; border-top: 1px dashed #999; margin: 8px 0; }
+.mm-rcpt .ln { display: flex; justify-content: space-between; gap: 12px; } .mm-rcpt .ln span:last-child { white-space: nowrap; }
+.mm-rcpt .tot { font-weight: 700; font-size: 17px; }
+.mm-poster { background: var(--orange); color: var(--navy); padding: 22px 20px 20px; display: grid; grid-template-columns: 90px minmax(0,1fr); gap: 16px; align-items: center; }
+.mm-poster svg { width: 90px; height: auto; }
+.mm-poster h4 { font: 400 clamp(28px, 3.4vw, 38px)/.95 var(--f-display); text-transform: uppercase; margin: 0; }
+.mm-poster p { margin: 8px 0 0; font-weight: 700; font-size: 14px; }
 
+/* ---------- JUMPMAN ---------- */
+.jump { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 32px; align-items: center; }
+.jump-art { position: relative; aspect-ratio: 4 / 5; max-width: 100%; overflow: hidden; border: 4px solid var(--bone); box-shadow: 12px 12px 0 var(--orange); }
+.jump-art svg { width: 100%; height: 100%; display: block; }
+.jump h2 { font-size: clamp(40px, 6.5vw, 76px); }
+.jump h2 span { color: var(--orange); }
+.jump p { color: var(--muted); max-width: 52ch; }
+.jump .stat { display: flex; flex-wrap: wrap; gap: 10px 24px; font-family: var(--f-cond); font-weight: 700; text-transform: uppercase; letter-spacing: .08em; font-size: 15px; margin: 14px 0 0; }
+.jump .stat b { font-family: var(--f-display); font-weight: 400; color: var(--cheese); font-size: 28px; display: block; letter-spacing: 0; }
+@media (max-width: 860px) { .jump { grid-template-columns: minmax(0,1fr); } .jump-art { max-width: 420px; } }
 /* ---------- COWORKERS ---------- */
 .cowork { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 24px; margin-top: 28px; }
 .dossier { padding: 22px; border: 1px solid var(--line); background: var(--navy-2); display: grid; gap: 12px; align-content: start; }
@@ -179,11 +219,9 @@ footer p { max-width: 75ch; }
 
 @media (max-width: 860px) {
   .shrine, .pred, .cowork, .res-grid { grid-template-columns: minmax(0,1fr); }
-  .memewall { grid-template-columns: repeat(2, minmax(0,1fr)); }
 }
 @media (max-width: 520px) {
   .wrap { padding-inline: 16px; }
-  .memewall { grid-template-columns: minmax(0,1fr); }
   .bar-row { grid-template-columns: minmax(0,1fr) 48px; }
   .bar-row .bar { grid-column: 1 / -1; grid-row: 2; }
   .dl { grid-template-columns: minmax(0,1fr); }
@@ -243,6 +281,54 @@ footer p { max-width: 75ch; }
 </div></div>
 
 <main>
+<section class="jumpsec">
+  <div class="wrap jump">
+    <div class="jump-art">
+      <svg viewBox="0 0 400 500" role="img" aria-label="Caleb Williams mid-air jump pass silhouette over the Chicago skyline at sunset">
+        <defs>
+          <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#0B162A"/><stop offset=".45" stop-color="#7A2A1B"/><stop offset=".75" stop-color="#E2550F"/><stop offset="1" stop-color="#FFB547"/>
+          </linearGradient>
+        </defs>
+        <rect width="400" height="500" fill="url(#sky)"/>
+        <circle cx="200" cy="395" r="95" fill="#FFC85A" opacity=".9"/>
+        <g fill="#0B162A">
+          <rect x="0" y="400" width="400" height="100"/>
+          <rect x="10" y="360" width="30" height="45"/><rect x="45" y="330" width="26" height="75"/>
+          <rect x="76" y="300" width="22" height="105"/><rect x="82" y="282" width="10" height="20"/>
+          <rect x="104" y="345" width="34" height="60"/>
+          <rect x="250" y="250" width="34" height="155"/><rect x="256" y="225" width="4" height="27"/><rect x="274" y="225" width="4" height="27"/>
+          <rect x="290" y="320" width="28" height="85"/><rect x="322" y="290" width="26" height="115"/><rect x="330" y="270" width="10" height="22"/>
+          <rect x="352" y="345" width="40" height="60"/>
+          <rect x="143" y="372" width="22" height="33"/><rect x="225" y="360" width="22" height="45"/>
+        </g>
+        <!-- leaping QB: original silhouette -->
+        <g fill="#F4EFE6" stroke="#F4EFE6" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="214" cy="112" r="17" stroke="none"/>
+          <path d="M206 132 L196 210" stroke-width="30"/>
+          <path d="M210 140 L262 98 L292 62" stroke-width="12" fill="none"/>
+          <path d="M202 145 L160 168 L136 182" stroke-width="11" fill="none"/>
+          <path d="M194 214 L240 236 L268 286" stroke-width="16" fill="none"/>
+          <path d="M194 214 L156 252 L112 262" stroke-width="16" fill="none"/>
+          <path d="M268 286 L284 292" stroke-width="10"/>
+          <path d="M112 262 L100 250" stroke-width="10"/>
+        </g>
+        <ellipse cx="304" cy="50" rx="15" ry="9" transform="rotate(-35 304 50)" fill="#7A3B12"/>
+        <path d="M297 52 L311 46" stroke="#F4EFE6" stroke-width="2"/>
+        <text x="200" y="468" text-anchor="middle" font-family="Anton, Impact, sans-serif" font-size="34" fill="#E2550F" letter-spacing="2">4TH &amp; GONE</text>
+      </svg>
+    </div>
+    <div>
+      <div class="eyebrow">Wild Card · 4th Down · Packers Linebacker Grabbing at Air</div>
+      <h2>Caleb <span>Jumpman</span> Williams</h2>
+      <p>Fourth down, a Packers linebacker diving at his ankles, and Caleb just leaves the ground. Midair, falling left, he floats one 27 yards to Rome Odunze and the whole internet sees Michael Jordan. Chicago got a new logo. Green Bay got a linebacker hugging grass.</p>
+      <p>It was so iconic it ended up on the Madden NFL 27 cover, Chicago skyline and all. The Packers ended up on the couch.</p>
+      <div class="stat"><span><b>27</b>Yards in the air</span><span><b>4th</b>Down, didn't care</span><span><b>0</b>Packers who touched him</span></div>
+      <a class="play" style="background:var(--orange);color:var(--navy)" href="https://www.youtube.com/results?search_query=Caleb+Williams+jumpman+throw+Packers+wild+card" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4v16l13-8z"/></svg>Watch the Jumpman throw</a>
+    </div>
+  </div>
+</section>
+
 <section>
   <div class="wrap">
     <div class="eyebrow">The Shrine</div>
@@ -282,14 +368,6 @@ footer p { max-width: 75ch; }
             <button type="button" class="chip" data-fan="nicole" aria-pressed="false">Nicole</button>
             <button type="button" class="chip" data-fan="any" aria-pressed="false">Any Cheesehead</button>
           </div>
-        </div>
-        <div class="field">
-          <label for="qb">Caleb Williams' hamstring</label>
-          <select id="qb">
-            <option value="out">Out (Bears spotting GB a QB out of pity)</option>
-            <option value="q">Questionable (Packers questionable always)</option>
-            <option value="full">100% healed (merciless mode)</option>
-          </select>
         </div>
         <div class="field">
           <label for="wx">Lambeau conditions</label>
@@ -376,14 +454,16 @@ footer p { max-width: 75ch; }
     </div>
     <div class="cowork">
       <article class="dossier minnow">
-        <span class="stamp">Threat level: Cheese Curd</span>
+        <span class="stamp">Threat level: Expired Cheese Curd</span>
         <h3>Minnow</h3>
         <dl class="dl">
-          <dt>Species</dt><dd>Small fish. Fitting, given the size of Green Bay's trophy case this decade.</dd>
-          <dt>Known for</dt><dd>Saying "Titletown" about a town whose last title predates most of his coffee mugs.</dd>
-          <dt>Coping method</dt><dd>Bringing up 1990s Favre highlights unprompted. The man lives in 1996 like it's a timeshare.</dd>
-          <dt>Monday forecast</dt><dd>Will arrive late, avoid eye contact, and claim he "didn't really watch the second half."</dd>
-          <dt>Recommended action</dt><dd>Leave a foam cheese wedge on his desk with a single tear drawn on it.</dd>
+          <dt>Species</dt><dd>Bottom-feeder. Small fish, big mouth, zero results. Basically the Packers in human form.</dd>
+          <dt>Known for</dt><dd>Yelling "Titletown" like he personally won something. He has never won anything. He was in a recliner.</dd>
+          <dt>Football IQ</dt><dd>About equal to the foam wedge on his head. At least the wedge keeps quiet when Green Bay loses.</dd>
+          <dt>Coping method</dt><dd>Bringing up 1996 unprompted. He has lived off one Super Bowl so long his Favre jersey is filing for retirement.</dd>
+          <dt>Monday forecast</dt><dd>Shows up late, "had internet issues," claims he "didn't even watch." He watched. We heard him through the wall.</dd>
+          <dt>Prediction record</dt><dd>Worse than a coin flip. A coin has called more Bears games right, and the coin isn't even trying.</dd>
+          <dt>Recommended action</dt><dd>Cheese grater on his keyboard. Box score taped to his monitor. No eye contact. Let him sit in it.</dd>
         </dl>
       </article>
       <article class="dossier nicole">
@@ -440,32 +520,55 @@ footer p { max-width: 75ch; }
   tickCd();
 
   // ---------- Memes ----------
+  var MAG = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#5f6368" d="M15.5 14h-.8l-.3-.3A6.5 6.5 0 1 0 14 15.5l.3.3v.8l5 5 1.5-1.5-5-5zm-6 0a4.5 4.5 0 1 1 0-9 4.5 4.5 0 0 1 0 9z"/></svg>';
+  var GRATER = '<svg viewBox="0 0 60 80" aria-hidden="true"><use href="#grater"/></svg>';
   var MEMES = [
-    { bg: "bg-fire", t: "Ben Johnson walking into the locker room", art: "🐻🎤", b: "Mic: dropped. Packers: also dropped." },
-    { bg: "bg-cheese", t: "Packers fans wearing cheese on their heads", art: "🧀🤡", b: "Then asking why nobody takes them seriously" },
-    { bg: "bg-green", t: "Green Bay offseason: \"This is our year\"", art: "📉", b: "Green Bay January: \"Wait till next year\"" },
-    { drake: true, no: "Saying sorry to Green Bay", yes: "Saying it again, louder", a: "🙅", c: "😎" },
-    { bg: "bg-navy", t: "Nobody:", art: "🐟", small: false, b: "Minnow: \"Well actually in 1996…\"" },
-    { bg: "bg-ice", t: "The Frozen Tundra", art: "🥶", b: "Is just the Packers' playoff hopes" },
-    { bg: "bg-fire", t: "Packers defense trying to stop the Bears", art: "🧱💨", b: "Swiss cheese. Wrong state, same holes." },
-    { drake: true, no: "Calling Lambeau \"historic\"", yes: "Calling it \"a big frozen Culver's\"", a: "🏟️", c: "🍦" },
-    { bg: "bg-green", t: "LaFleur reaching for the handshake", art: "🤝✈️", b: "Ben Johnson already at the bus" },
-    { bg: "bg-cheese", t: "Me explaining to Nicole she's too nice to be a Packers fan", art: "🫶", b: "Offer stands. Orange looks good on you." },
-    { bg: "bg-navy", t: "31 - 27", art: "🐻", b: "That's it. That's the meme." },
-    { bg: "bg-green", t: "Packers fans after the Wild Card game", art: "🧀😭", b: "Brie-reaving" },
-    { bg: "bg-fire", grater: true, t: "Cheesehead walks into Soldier Field", b: "Bears fans: *pull out the grater*" },
-    { drake: true, no: "Wearing a foam cheese hat", yes: "Wearing a cheese grater hat", a: "🧀", c: "GRATER" }
+    { who: "all", html:
+      '<div class="mm mm-search" role="img" aria-label="Search suggestions for why are the packers">' +
+      '<div class="q">' + MAG + '<b>why are the packers</b><i></i></div><ul>' +
+      ['so bad against ben johnson', 'fans wearing cheese on purpose', 'still talking about brett favre', 'owned by the public (who want a refund)', 'fan named minnow so loud for no reason']
+        .map(function (t) { return '<li>' + MAG + '<span>why are the packers <strong>' + t + '</strong></span></li>'; }).join('') + '</ul></div>' },
+    { who: "minnow", html:
+      '<div class="mm mm-texts" role="img" aria-label="Text thread with Minnow">' +
+      '<div class="who">To:<b>Minnow</b></div>' +
+      '<div class="ts">Sat 9:14 PM</div>' +
+      '<div class="in">Bears are frauds. Lambeau is gonna eat them alive tmrw</div>' +
+      '<div class="in">Screenshot this</div>' +
+      '<div class="out">Oh I will</div>' +
+      '<div class="ts">Sun 3:21 PM</div>' +
+      '<div class="out">Final score just dropped</div>' +
+      '<div class="out">You said to screenshot it so here you go</div>' +
+      '<div class="out">Minnow?</div>' +
+      '<div class="read">Read 3:22 PM</div></div>' },
+    { who: "all", html:
+      '<div class="mm mm-news" role="img" aria-label="Satirical newspaper headline">' +
+      '<div class="mast">The Midway Times</div><div class="date"><span>Monday Edition</span><span>Satire · 25¢</span></div>' +
+      '<h4>Ben Johnson Asked for Apology, Responds by Pointing at Scoreboard for Eleven Straight Minutes</h4>' +
+      '<p>GREEN BAY — Reporters gathered Sunday hoping for contrition. Johnson instead read the box score aloud, slowly, twice. Packers coaches asked for a moment of silence. Johnson said they had been silent all afternoon.</p></div>' },
+    { who: "minnow", html:
+      '<div class="mm mm-wx" role="img" aria-label="Weather forecast for Lambeau Field">' +
+      '<div class="loc">Lambeau Field</div><div class="big">0%</div>' +
+      '<div class="cond">Chance of a Packers win</div><div class="hl">H: Bears &nbsp; L: Everyone in green</div>' +
+      '<div class="alert"><b>Minnow Advisory in effect</b>Heavy excuses expected after 3 PM. Loud, unfounded takes likely through Wednesday.</div>' +
+      '<div class="hours"><div>Noon<b>Hope</b></div><div>1 PM<b>Doubt</b></div><div>2 PM<b>Panic</b></div><div>3 PM<b>Tears</b></div></div></div>' },
+    { who: "all", html:
+      '<div class="mm mm-ach" role="img" aria-label="Achievement unlocked">' +
+      '<div class="trophy">BJ</div><div><small>Achievement unlocked · 100G</small><b>Ruined Wisconsin</b><span>Beat the Packers, then refuse to apologize for it.</span></div></div>' },
+    { who: "all", html:
+      '<div class="mm mm-rcpt" role="img" aria-label="Satirical receipt for a Packers fan">' +
+      '<div class="c">Cheesehead Outlet<br>Green Bay, WI<br>*** Satire ***</div><hr>' +
+      '<div class="ln"><span>Foam cheese hat</span><span>$39.99</span></div>' +
+      '<div class="ln"><span>"This is our year" tee</span><span>$29.99</span></div>' +
+      '<div class="ln"><span>Favre DVD (1996)</span><span>$4.99</span></div>' +
+      '<div class="ln"><span>Tissues, family size</span><span>$6.49</span></div>' +
+      '<div class="ln"><span>Playoff win</span><span>OUT OF STOCK</span></div><hr>' +
+      '<div class="ln tot"><span>Total</span><span>1 L</span></div>' +
+      '<div class="c" style="margin-top:8px">No refunds. Not even to shareholders.</div></div>' },
+    { who: "all", html:
+      '<div class="mm mm-poster" role="img" aria-label="Cheese grater poster">' + GRATER +
+      '<div><h4>You brought the cheese. We brought the grater.</h4><p>Chicago Bears. Reducing Wisconsin to shreds since 1921.</p></div></div>' }
   ];
-  function memeHTML(m) {
-    if (m.drake) {
-      return '<div class="meme bg-drake" role="img" aria-label="Meme: no to ' + m.no + ', yes to ' + m.yes + '">' +
-        '<div class="cell a">' + m.a + '</div><div class="cell txt">' + m.no + '</div>' +
-        '<div class="cell c" style="border-bottom:0">' + (m.c === "GRATER" ? '<svg viewBox="0 0 60 80" style="width:46%;height:auto"><use href="#grater"/></svg>' : m.c) + '</div><div class="cell txt" style="border-bottom:0">' + m.yes + '</div></div>';
-    }
-    return '<div class="meme ' + m.bg + '" role="img" aria-label="Meme: ' + m.t + ' / ' + m.b + '">' +
-      '<div class="t">' + m.t + '</div><div class="art' + (m.art && m.art.length > 4 ? " small" : "") + '">' + (m.grater ? '<svg viewBox="0 0 60 80" style="width:42%;height:auto"><use href="#grater"/></svg>' : m.art) + '</div><div class="b">' + m.b + '</div>' +
-      '<span class="wm">dabears.meme</span></div>';
-  }
+  function memeHTML(m) { return m.html; }
   document.getElementById("memewall").innerHTML = MEMES.map(memeHTML).join("");
 
   // ---------- Videos (link out; artifacts can't embed YouTube) ----------
@@ -510,11 +613,14 @@ footer p { max-width: 75ch; }
 
   var FAN_MSG = {
     minnow: [
-      "Pack a lunch, little fish. Actually pack a few. You'll be eating your words all week, and that's not a filling meal.",
-      "Statistically, you have a better chance of being promoted to Shark than Green Bay has of winning this game.",
-      "Your team is like your nickname: small, slippery, and gone the moment something bigger shows up.",
-      "We've already printed the Monday morning sign for your desk. It just says \"31–27\" in very large font.",
-      "Please stop saying \"Discount Double Check.\" That was 2011. The discount has expired. So has the team."
+      "Minnow, you talked all week like a shark. Turns out you're bait. Always have been.",
+      "Your takes have the shelf life of gas station cheese curds, Minnow, and by Monday they smell about the same.",
+      "Minnow, the Packers are owned by thousands of fans and not one of them wanted to claim you.",
+      "You've said \"next year\" so many times, Minnow, it's basically your middle name. Minnow Next-Year. It suits you.",
+      "We printed the final score on a poster for your cubicle, Minnow. Big font, so you can read it through the tears.",
+      "Minnow, a coin flip has a better prediction record than you, and the coin doesn't own a single foam hat.",
+      "Stop saying \"Discount Double Check,\" Minnow. It was 2011. That commercial has aged better than your team, which isn't saying much.",
+      "Minnow, you're the only guy in the building who loses twice a week: once on Sunday with the Packers, and again Monday when he opens his mouth."
     ],
     nicole: [
       "Nicole, this is going to be a tough Sunday, and you don't deserve it. You're the nicest person in the building. Your team, unfortunately, is the Packers.",
@@ -530,11 +636,6 @@ footer p { max-width: 75ch; }
   };
   var TITLES = { minnow: "Dear Minnow,", nicole: "Sweet Nicole,", any: "Attention Cheeseheads," };
 
-  var QB_KEY = {
-    out: ["Caleb is out, which is the Bears being polite. Green Bay still can't handle it.", "Backup QB throws for 300 yards. Packers secondary files a missing persons report on itself."],
-    q: ["Caleb plays on one good hamstring. One is plenty.", "Questionable tag removed the moment he saw the Packers on film."],
-    full: ["Fully healthy Caleb. We asked the league to check on the Packers' well-being at halftime.", "Caleb's hamstring is healed and also angry."]
-  };
   var WX_KEY = {
     sun: "Perfect weather, so Green Bay can't even blame the wind this time.",
     tundra: "Packers fans insist it's the Frozen Tundra. It's 54 degrees. The only thing frozen is their offense.",
@@ -569,8 +670,7 @@ footer p { max-width: 75ch; }
 
   function predict() {
     runs++;
-    var d = +dis.value, qb = document.getElementById("qb").value;
-    var qbBoost = qb === "full" ? 10 : qb === "q" ? 5 : 0;
+    var d = +dis.value, qbBoost = 0;
     var g = pick(GBPTS);
     var gb = g[0];
     if (d >= 10) gb = Math.min(gb, 3);
@@ -592,7 +692,7 @@ footer p { max-width: 75ch; }
     document.getElementById("ou").textContent = pick(["Packers' feelings: Under", "Minnow excuses: Over", "Cheese consumed: Over", "Packers 1st downs: Under"]);
     document.getElementById("conf").textContent = d === 11 ? "Beyond science" : pick(CONF);
 
-    var keys = [pick(QB_KEY[qb]), WX_KEY[document.getElementById("wx").value], HATS_KEY[document.getElementById("hats").value]];
+    var keys = [WX_KEY[document.getElementById("wx").value], HATS_KEY[document.getElementById("hats").value]];
     var gen = GENERIC.slice().sort(function () { return Math.random() - .5; });
     keys.push(gen[0], gen[1]);
     if (d >= 9) keys.push("Disrespect at " + d + ": Bears go for two after every TD just to make a point.");
@@ -602,12 +702,12 @@ footer p { max-width: 75ch; }
     note.className = "fan-note " + fan;
     document.getElementById("fanTitle").textContent = TITLES[fan];
     var msg = pick(FAN_MSG[fan]);
-    if (fan === "minnow" && d >= 9) msg += " Also, your desk plant is a Bears fan now. It told us.";
+    if (fan === "minnow" && d >= 9) msg += " Also, your desk plant asked to be moved closer to a Bears fan. Even it is embarrassed.";
     if (fan === "nicole") msg += " (Minnow, on the other hand, had this coming.)";
     document.getElementById("fanMsg").textContent = msg;
 
-    var pool = MEMES.filter(function (m) { return fan === "nicole" || !/Nicole/.test(m.t || ""); });
-    if (fan === "nicole") pool = pool.filter(function (m) { return !/Minnow/.test((m.t || "") + (m.b || "")); });
+    var pool = MEMES.filter(function (m) { return m.who === "all"; });
+    if (fan === "minnow" && Math.random() < .6) pool = MEMES.filter(function (m) { return m.who === "minnow"; });
     document.getElementById("resMeme").innerHTML = memeHTML(pick(pool));
 
     var others = VIDS.slice().sort(function () { return Math.random() - .5; }).slice(0, 2);
