@@ -205,6 +205,27 @@ input[type=range] { accent-color: var(--orange); }
 .mm-poster h4 { font: 400 clamp(28px, 3.4vw, 38px)/.95 var(--f-display); text-transform: uppercase; margin: 0; }
 .mm-poster p { margin: 8px 0 0; font-weight: 700; font-size: 14px; }
 
+/* ---------- FIELD GUIDE + BINGO ---------- */
+.species { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 18px; margin-top: 28px; }
+.sp { background: #F1EBDD; color: #1d2a1f; padding: 18px 18px 14px; border: 1px solid #c9bfa8; box-shadow: 0 12px 30px rgba(0,0,0,.35); position: relative; }
+.sp::before { content: ""; position: absolute; inset: 8px; border: 1px solid rgba(46,94,64,.35); pointer-events: none; }
+.sp-head { border-bottom: 2px solid var(--gb-green); padding-bottom: 10px; margin-bottom: 10px; }
+.sp-no { font: 800 11px var(--f-cond); text-transform: uppercase; letter-spacing: .16em; color: #7a6a3a; }
+.sp h3 { font-size: 30px; text-transform: uppercase; color: var(--gb-green); margin-top: 4px; }
+.sp i { font-family: Georgia, serif; color: #5b5440; font-size: 15px; }
+.sp dl { display: grid; grid-template-columns: 78px minmax(0,1fr); gap: 6px 10px; margin: 0; font-size: 14.5px; line-height: 1.45; }
+.sp dt { font: 800 11px var(--f-cond); text-transform: uppercase; letter-spacing: .12em; color: #7a6a3a; padding-top: 3px; }
+.sp dd { margin: 0; }
+.bingo-wrap { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); gap: 32px; align-items: start; margin-top: 48px; }
+.bingo-title { font-size: clamp(30px, 4.5vw, 46px); text-transform: uppercase; }
+.bingo-status { font: 400 26px var(--f-display); color: var(--cheese); margin: 16px 0 12px; text-transform: uppercase; }
+.bingo { display: grid; grid-template-columns: repeat(5, minmax(0,1fr)); gap: 6px; background: var(--gb-green); padding: 10px; border: 3px solid var(--cheese); }
+.bingo button { aspect-ratio: 1; max-width: 100%; background: #F1EBDD; color: #1d2a1f; border: 0; padding: 6px; font: 700 clamp(10px, 1.25vw, 13.5px)/1.15 var(--f-cond); text-transform: uppercase; letter-spacing: .02em; cursor: pointer; position: relative; overflow: hidden; }
+.bingo button:hover { background: #fff; }
+.bingo button[aria-pressed="true"]::after { content: ""; position: absolute; inset: 10%; border-radius: 50%; background: rgba(226,85,15,.78); mix-blend-mode: multiply; }
+.bingo button.free { background: var(--cheese); }
+.bingo button.win { outline: 3px solid var(--orange); outline-offset: -3px; }
+@media (max-width: 860px) { .species, .bingo-wrap { grid-template-columns: minmax(0,1fr); } }
 /* ---------- COWORKERS ---------- */
 .cowork { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 24px; margin-top: 28px; }
 .dossier { padding: 22px; border: 1px solid var(--line); background: var(--navy-2); display: grid; gap: 12px; align-content: start; }
@@ -599,6 +620,53 @@ section h2::after { content: ""; position: absolute; left: 0; bottom: 0; width: 
     <h2>The Meme Wall</h2>
     <p class="lede">Hand-crafted. Locally sourced. Gluten free, unlike every item sold at Lambeau.</p>
     <div class="memewall" id="memewall"></div>
+  </div>
+</section>
+
+<section id="fieldguide">
+  <div class="wrap">
+    <div class="eyebrow">Wildlife of Wisconsin · Observe From a Safe Distance</div>
+    <h2>A Field Guide to the Packers Fan</h2>
+    <p class="lede">Three common species, all found within 50 feet of a cheese curd. None of them have been right about anything since 2010.</p>
+    <div class="species">
+      <article class="sp">
+        <div class="sp-head"><span class="sp-no">Specimen A</span><h3>The Cheesehead</h3><i>Fromagius foamheadus</i></div>
+        <dl>
+          <dt>Habitat</dt><dd>Lambeau parking lot, 7 a.m., already three beers deep.</dd>
+          <dt>Call</dt><dd>"GO PACK GO," repeated until the fourth quarter, then silence.</dd>
+          <dt>Diet</dt><dd>Brats, curds, Miller Lite and excuses.</dd>
+          <dt>Fun fact</dt><dd>Voluntarily wears a triangle of foam cheese in public. Has a mortgage.</dd>
+        </dl>
+      </article>
+      <article class="sp">
+        <div class="sp-head"><span class="sp-no">Specimen B</span><h3>The Historian</h3><i>Titletownus nostalgicus</i></div>
+        <dl>
+          <dt>Habitat</dt><dd>Any conversation about the current season, which he immediately steers to 1967.</dd>
+          <dt>Call</dt><dd>"We have thirteen titles." Can't name a player on any of those teams.</dd>
+          <dt>Diet</dt><dd>VHS tapes of Lombardi, Favre highlight reels, the past.</dd>
+          <dt>Fun fact</dt><dd>Describes Lambeau as "hallowed ground." It's a parking lot with a stadium in it.</dd>
+        </dl>
+      </article>
+      <article class="sp">
+        <div class="sp-head"><span class="sp-no">Specimen C</span><h3>The Shareholder</h3><i>Ownerus delusionalis</i></div>
+        <dl>
+          <dt>Habitat</dt><dd>Framed stock certificate in the basement, next to the dehumidifier.</dd>
+          <dt>Call</dt><dd>"Well, technically I'm an owner." It's worth nothing. It pays nothing. He paid $300 for it.</dd>
+          <dt>Diet</dt><dd>Annual meeting snacks and a deep sense of importance.</dd>
+          <dt>Fun fact</dt><dd>Owns a piece of the team and still can't get anyone to fire the kicker.</dd>
+        </dl>
+      </article>
+    </div>
+
+    <div class="bingo-wrap">
+      <div>
+        <h3 class="bingo-title">Packers Fan Bingo</h3>
+        <p class="lede">Bring this to work Monday. Tap a square every time a Packers fan says or does it. Five in a row wins. Minnow usually gets you a blackout by lunch.</p>
+        <p class="bingo-status" id="bingoStatus" aria-live="polite">0 squares marked</p>
+        <button type="button" class="chip" id="bingoReset">Clear card</button>
+      </div>
+      <div class="bingo" id="bingo" role="grid" aria-label="Packers fan bingo card"></div>
+    </div>
   </div>
 </section>
 
@@ -1051,6 +1119,43 @@ section h2::after { content: ""; position: absolute; left: 0; bottom: 0; width: 
     if (!raf) ctx.clearRect(0, 0, innerWidth, innerHeight);
   }
   new MutationObserver(function () { setTimeout(burst, 200); }).observe(document.getElementById("updStamp"), { childList: true });
+})();
+</script>
+
+<script>
+(function () {
+  var SQ = ["Says \"Titletown\"", "Brings up 1996", "Recites the 13 titles", "Blames the refs", "\"Bears are lucky\"",
+    "\"I still own you\"", "Mentions being a shareholder", "Wears cheese indoors", "\"Discount Double Check\"", "\"It's a rebuilding year\"",
+    "Calls Lambeau \"hallowed\"", "Says Favre's full name", "Blames the kicker", "\"Wait till Christmas\"", "Says \"Go Pack Go\" unprompted",
+    "Leaves before the 4th quarter", "\"At least we have rings\"", "Changes the subject to the Lions", "\"It's just one game\"", "Wears a jersey to work Monday",
+    "Says LaFleur is \"a good coach\"", "Avoids eye contact", "\"The Bears always choke\"", "Calls in sick Monday"];
+  var el = document.getElementById("bingo"), status = document.getElementById("bingoStatus");
+  var order = SQ.slice().sort(function () { return Math.random() - .5; });
+  order.splice(12, 0, "FREE: Foam cheese on head");
+  el.innerHTML = order.map(function (t, i) {
+    return '<button type="button" role="gridcell" aria-pressed="' + (i === 12) + '"' + (i === 12 ? ' class="free" disabled' : '') + ' data-i="' + i + '">' + t + '</button>';
+  }).join("");
+  var LINES = [];
+  for (var r = 0; r < 5; r++) LINES.push([0,1,2,3,4].map(function (c) { return r * 5 + c; }));
+  for (var c = 0; c < 5; c++) LINES.push([0,1,2,3,4].map(function (r) { return r * 5 + c; }));
+  LINES.push([0,6,12,18,24], [4,8,12,16,20]);
+  function check() {
+    var b = el.querySelectorAll("button"), on = function (i) { return b[i].getAttribute("aria-pressed") === "true"; };
+    b.forEach(function (x) { x.classList.remove("win"); });
+    var wins = LINES.filter(function (L) { return L.every(on); });
+    wins.forEach(function (L) { L.forEach(function (i) { b[i].classList.add("win"); }); });
+    var n = [].filter.call(b, function (x, i) { return on(i); }).length - 1;
+    if (n === 24) status.textContent = "Blackout. It's Minnow, isn't it.";
+    else if (wins.length) status.textContent = "BINGO! Packers fan confirmed.";
+    else status.textContent = n + (n === 1 ? " square" : " squares") + " marked";
+  }
+  el.addEventListener("click", function (e) {
+    var t = e.target.closest("button"); if (!t || t.disabled) return;
+    t.setAttribute("aria-pressed", String(t.getAttribute("aria-pressed") !== "true")); check();
+  });
+  document.getElementById("bingoReset").addEventListener("click", function () {
+    el.querySelectorAll("button:not(.free)").forEach(function (x) { x.setAttribute("aria-pressed", "false"); }); check();
+  });
 })();
 </script>
 </body>
