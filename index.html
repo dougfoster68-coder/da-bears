@@ -172,16 +172,6 @@ input[type=range] { accent-color: var(--orange); }
 .mm-poster h4 { font: 400 clamp(28px, 3.4vw, 38px)/.95 var(--f-display); text-transform: uppercase; margin: 0; }
 .mm-poster p { margin: 8px 0 0; font-weight: 700; font-size: 14px; }
 
-/* ---------- JUMPMAN ---------- */
-.jump { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 32px; align-items: center; }
-.jump-art { position: relative; aspect-ratio: 4 / 5; max-width: 100%; overflow: hidden; border: 4px solid var(--bone); box-shadow: 12px 12px 0 var(--orange); }
-.jump-art svg { width: 100%; height: 100%; display: block; }
-.jump h2 { font-size: clamp(40px, 6.5vw, 76px); }
-.jump h2 span { color: var(--orange); }
-.jump p { color: var(--muted); max-width: 52ch; }
-.jump .stat { display: flex; flex-wrap: wrap; gap: 10px 24px; font-family: var(--f-cond); font-weight: 700; text-transform: uppercase; letter-spacing: .08em; font-size: 15px; margin: 14px 0 0; }
-.jump .stat b { font-family: var(--f-display); font-weight: 400; color: var(--cheese); font-size: 28px; display: block; letter-spacing: 0; }
-@media (max-width: 860px) { .jump { grid-template-columns: minmax(0,1fr); } .jump-art { max-width: 420px; } }
 /* ---------- COWORKERS ---------- */
 .cowork { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 24px; margin-top: 28px; }
 .dossier { padding: 22px; border: 1px solid var(--line); background: var(--navy-2); display: grid; gap: 12px; align-content: start; }
@@ -289,54 +279,6 @@ footer p { max-width: 75ch; }
 </div></div>
 
 <main>
-<section class="jumpsec">
-  <div class="wrap jump">
-    <div class="jump-art">
-      <svg viewBox="0 0 400 500" role="img" aria-label="Poster: number 18 over the Chicago skyline at sunset, captioned Jumpman, 4th and 27 yards">
-        <defs>
-          <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stop-color="#0B162A"/><stop offset=".4" stop-color="#3A1A2A"/><stop offset=".66" stop-color="#B8400F"/><stop offset=".88" stop-color="#F07A1E"/><stop offset="1" stop-color="#FFC45C"/>
-          </linearGradient>
-          <radialGradient id="sun" cx=".5" cy=".5" r=".5">
-            <stop offset="0" stop-color="#FFF1B8"/><stop offset=".55" stop-color="#FFC85A"/><stop offset="1" stop-color="#FF9A2E" stop-opacity="0"/>
-          </radialGradient>
-        </defs>
-        <rect width="400" height="500" fill="url(#sky)"/>
-        <g stroke="#FFD27A" stroke-width="3" opacity=".2">
-          <path d="M200 400 L0 230"/><path d="M200 400 L60 150"/><path d="M200 400 L150 120"/><path d="M200 400 L250 120"/><path d="M200 400 L340 150"/><path d="M200 400 L400 230"/>
-        </g>
-        <circle cx="200" cy="400" r="150" fill="url(#sun)"/>
-        <circle cx="200" cy="400" r="78" fill="#FFD27A"/>
-        <text x="200" y="300" text-anchor="middle" font-family="Anton, Impact, sans-serif" font-size="300" fill="#05080F" stroke="#E2550F" stroke-width="4" paint-order="stroke" letter-spacing="-6">18</text>
-        <g fill="#0B162A">
-          <rect x="0" y="372" width="34" height="60"/><rect x="38" y="338" width="28" height="90"/><rect x="70" y="352" width="22" height="80"/>
-          <rect x="96" y="292" width="30" height="140"/><rect x="104" y="266" width="14" height="28"/><rect x="110" y="236" width="2" height="32"/>
-          <rect x="130" y="356" width="26" height="80"/><rect x="160" y="378" width="20" height="60"/><rect x="226" y="372" width="22" height="60"/>
-          <path d="M252 432 L252 236 L262 232 L262 220 L286 220 L286 232 L296 236 L296 432Z"/>
-          <rect x="264" y="190" width="3" height="32"/><rect x="281" y="194" width="3" height="28"/>
-          <path d="M302 432 L302 312 L316 296 L330 312 L330 432Z"/>
-          <rect x="334" y="334" width="26" height="100"/><rect x="364" y="300" width="36" height="134"/><rect x="376" y="282" width="12" height="20"/>
-          <rect x="0" y="420" width="400" height="80"/>
-        </g>
-        <g fill="#FFC85A" opacity=".55">
-          <rect x="102" y="304" width="3" height="4"/><rect x="112" y="320" width="3" height="4"/><rect x="258" y="250" width="3" height="4"/><rect x="270" y="270" width="3" height="4"/><rect x="284" y="300" width="3" height="4"/><rect x="370" y="316" width="3" height="4"/><rect x="44" y="352" width="3" height="4"/>
-        </g>
-        <text x="200" y="60" text-anchor="middle" font-family="Anton, Impact, sans-serif" font-size="44" fill="#F4EFE6" letter-spacing="10">JUMPMAN</text>
-        <text x="200" y="86" text-anchor="middle" font-family="Barlow Condensed, Arial Narrow, sans-serif" font-weight="700" font-size="15" fill="#FF8A4C" letter-spacing="4">CHICAGO · EST. WILD CARD WEEKEND</text>
-        <text x="200" y="468" text-anchor="middle" font-family="Anton, Impact, sans-serif" font-size="30" fill="#E2550F" letter-spacing="3">4TH DOWN. 27 YARDS.</text>
-        <text x="200" y="490" text-anchor="middle" font-family="Barlow Condensed, Arial Narrow, sans-serif" font-weight="700" font-size="13" fill="#9FB0CC" letter-spacing="2">PACKERS LINEBACKER STILL GRABBING AIR</text>
-      </svg>
-    </div>
-    <div>
-      <div class="eyebrow">Wild Card · 4th Down · Packers Linebacker Grabbing at Air</div>
-      <h2>Caleb <span>Jumpman</span> Williams</h2>
-      <p>Fourth down, a Packers linebacker diving at his ankles, and Caleb just leaves the ground. Midair, falling left, he floats one 27 yards to Rome Odunze and the whole internet sees Michael Jordan. Chicago got a new logo. Green Bay got a linebacker hugging grass.</p>
-      <p>It was so iconic it ended up on the Madden NFL 27 cover, Chicago skyline and all. The Packers ended up on the couch.</p>
-      <div class="stat"><span><b>27</b>Yards in the air</span><span><b>4th</b>Down, didn't care</span><span><b>0</b>Packers who touched him</span></div>
-      <a class="play" style="background:var(--orange);color:var(--navy)" href="https://www.youtube.com/results?search_query=Caleb+Williams+jumpman+throw+Packers+wild+card" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4v16l13-8z"/></svg>Watch the Jumpman throw</a>
-    </div>
-  </div>
-</section>
 
 <section>
   <div class="wrap">
